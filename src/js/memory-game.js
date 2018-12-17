@@ -3,6 +3,7 @@ import { memoryTemplate } from './memoryTemplate.js'
 class Memory extends window.HTMLElement {
   constructor () {
     super()
+    this.zIndex = 0
     this.rows = 4
     this.cols = 4
     this.turn1 = ''
@@ -16,7 +17,9 @@ class Memory extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(memoryTemplate.content.cloneNode(true))
     this.container = this.shadowRoot.querySelector('#container')
+    this.closeButton = this.shadowRoot.querySelector('#border-top a')
   }
+
   connectedCallback () {
     this.memory()
     this.container.addEventListener('mousedown', (e) => {
@@ -28,8 +31,9 @@ class Memory extends window.HTMLElement {
     this.container.addEventListener('mouseup', (e) => {
       this.onMouseUp(e)
     })
-    // this.container.addEventListener('click', (e) => {
-    // })
+    this.closeButton.addEventListener('click', (e) => {
+      this.clean()
+    })
   }
 
   memory () {
@@ -133,7 +137,14 @@ class Memory extends window.HTMLElement {
   onMouseUp (e) {
     this.isMouseDown = false
     this.container.style.opacity = 1
-    this.container.style.zIndex += '1'
+    this.zIndex += 1
+    this.container.style.zIndex = this.zIndex
+  }
+
+  clean () {
+    while (this.shadowRoot.firstChild) {
+      this.shadowRoot.removeChild(this.shadowRoot.firstChild)
+    }
   }
 }
 

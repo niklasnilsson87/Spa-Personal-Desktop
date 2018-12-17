@@ -55,8 +55,8 @@ p {
   margin-top: 3px;
 }
 </style>
-  <div id="container">
-  <div id="border-top"><img src="./image/Cbutton2.png" alt="closing button" /></div>
+  <div id="container" value=1>
+  <div id="border-top"><a href="#"><img src="./image/Cbutton2.png" alt="closing button" /></a></div>
   <div id="memoryContainer">
   
   <h1>Memory!</h1>
