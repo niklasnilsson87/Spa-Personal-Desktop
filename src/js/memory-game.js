@@ -28,10 +28,8 @@ class Memory extends window.HTMLElement {
     this.container.addEventListener('mouseup', (e) => {
       this.onMouseUp(e)
     })
-    this.container.addEventListener('click', (e) => {
-      this.container.style.zIndex = '99999'
-    })
-    this.container.style.zIndex = '1'
+    // this.container.addEventListener('click', (e) => {
+    // })
   }
 
   memory () {
@@ -135,7 +133,7 @@ class Memory extends window.HTMLElement {
   onMouseUp (e) {
     this.isMouseDown = false
     this.container.style.opacity = 1
-    this.container.removeEventlistener('mousemove')
+    this.container.style.zIndex += '1'
   }
 }
 
