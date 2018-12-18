@@ -4,7 +4,10 @@ import { mainCSS } from './mainCSS.js'
 class Weather extends window.HTMLElement {
   constructor () {
     super()
-    this.aipKey = 'ba59d28f9f13f728e9b8884984882a98'
+    this.zIndex = 0
+    this.aipKey = '&APPID=ba59d28f9f13f728e9b8884984882a98'
+    this.city = 'Kalmar'
+    this.api = 'http://api.openweathermap.org/data/2.5/weather?q='
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(weatherTemplate.content.cloneNode(true))
@@ -14,6 +17,7 @@ class Weather extends window.HTMLElement {
 
   connectedCallback () {
     this.getWeather()
+    this.getInputValue()
     this.container.addEventListener('mousedown', (e) => {
       this.onMouseDown(e)
     })
@@ -32,6 +36,11 @@ class Weather extends window.HTMLElement {
     this.weather = await window.fetch('http://api.openweathermap.org/data/2.5/weather?q=kalmar&units=metric&APPID=ba59d28f9f13f728e9b8884984882a98&lang=se')
     this.weather = await this.weather.json()
     console.log(this.weather.main.temp)
+  }
+
+  getInputValue () {
+    let city = this.shadowRoot.querySelector('#city').value
+    console.log(city)
   }
 
   onMouseDown (e) {

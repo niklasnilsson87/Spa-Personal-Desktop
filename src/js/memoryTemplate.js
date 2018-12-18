@@ -24,7 +24,10 @@ weatherTemplate.innerHTML = /* html */ `
   <div id="memoryContainer">
   
   <h1>Weather</h1>
-    <input id="city" value="kalmar"></input>
+  <p>
+    Enter City:<input id="city" value="kalmar"></input>
+    <button>Submit</button>
+  </p>
   </div>
   <p class="win"></p>
   </div>
