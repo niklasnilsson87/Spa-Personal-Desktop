@@ -1,4 +1,5 @@
 import { memoryTemplate } from './memoryTemplate.js'
+import { mainCSS } from './mainCSS.js'
 
 class Memory extends window.HTMLElement {
   constructor () {
@@ -15,6 +16,7 @@ class Memory extends window.HTMLElement {
     this.mouseOffset = { x: 0, y: 0 }
     this.isMouseDown = false
     this.attachShadow({ mode: 'open' })
+    this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(memoryTemplate.content.cloneNode(true))
     this.container = this.shadowRoot.querySelector('#container')
     this.closeButton = this.shadowRoot.querySelector('#border-top a')
