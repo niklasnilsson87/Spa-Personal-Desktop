@@ -1,10 +1,9 @@
-import { memoryTemplate } from './memoryTemplate.js'
+import { memoryTemplate } from './templates.js'
 import { mainCSS } from './mainCSS.js'
 
 class Memory extends window.HTMLElement {
   constructor () {
     super()
-    this.zIndex = 0
     this.rows = 4
     this.cols = 4
     this.turn1 = ''
@@ -13,29 +12,14 @@ class Memory extends window.HTMLElement {
     this.pair = 0
     this.tries = 0
     this.tiles = []
-    this.mouseOffset = { x: 0, y: 0 }
-    this.isMouseDown = false
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(memoryTemplate.content.cloneNode(true))
     this.container = this.shadowRoot.querySelector('#container')
-    this.closeButton = this.shadowRoot.querySelector('#border-top a')
   }
 
   connectedCallback () {
     this.memory()
-    this.container.addEventListener('mousedown', (e) => {
-      this.onMouseDown(e)
-    })
-    document.body.addEventListener('mousemove', (e) => {
-      this.onMouseMove(e)
-    })
-    this.container.addEventListener('mouseup', (e) => {
-      this.onMouseUp(e)
-    })
-    this.closeButton.addEventListener('click', (e) => {
-      this.clean()
-    })
   }
 
   memory () {
@@ -116,37 +100,6 @@ class Memory extends window.HTMLElement {
       let temp = this.tiles[i]
       this.tiles[i] = this.tiles[j]
       this.tiles[j] = temp
-    }
-  }
-
-  onMouseDown (e) {
-    this.isMouseDown = true
-    this.mouseOffset = {
-      x: this.container.offsetLeft - e.clientX,
-      y: this.container.offsetTop - e.clientY
-    }
-  }
-
-  onMouseMove (e) {
-    e.preventDefault()
-    if (this.isMouseDown) {
-      this.container.style.opacity = 0.5
-      this.container.style.left = e.clientX + this.mouseOffset.x + 'px'
-      this.container.style.top = e.clientY + this.mouseOffset.y + 'px'
-    }
-  }
-
-  onMouseUp (e) {
-    this.isMouseDown = false
-    this.container.style.opacity = 1
-    this.zIndex += 1
-    this.container.style.zIndex = this.zIndex
-    console.log(this.zIndex)
-  }
-
-  clean () {
-    while (this.shadowRoot.firstChild) {
-      this.shadowRoot.removeChild(this.shadowRoot.firstChild)
     }
   }
 }

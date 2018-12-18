@@ -2,7 +2,7 @@ const mainCSS = document.createElement('template')
 mainCSS.innerHTML = /* html */`
 <style>
 #container {
-  width: 200px;
+  width: auto;
   height: auto;
   background-color: white;
   position: absolute;
@@ -17,7 +17,7 @@ mainCSS.innerHTML = /* html */`
   border-color: orange;
   background-color: lightblue;
   border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 h1 {
@@ -27,12 +27,13 @@ h1 {
 }
 
 #memoryContainer {
-    margin: 0 auto;
-    width: 80%;
+  padding: 30px;
+  margin: 0 auto;
+  width: 300px;
   }
 
-  .memory img {
-    width: 25%;
+.memory img {
+  width: 25%;
   }
 
 .memory .remove {
@@ -53,6 +54,37 @@ p {
   width: 15px;
   margin-right: 6px;
   margin-top: 3px;
+}
+
+#weather {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  margin: 0 auto;
+  padding: 30px;
+  width: 300px;
+  background-image: linear-gradient(to bottom right, lightblue, lightgreen);
+}
+
+#disp {
+  display: inline-block;
+}
+
+#temp {
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 16px;
+  width: 130px;
+  height: 60px;
+  background-image: linear-gradient(to bottom right, white, lightblue);
+}
+
+#imgW {
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 16px;
+  width: 130px;
+  height: 60px;
+  background-image: linear-gradient(to bottom right, white, orange);
 }
 </style>
 `
