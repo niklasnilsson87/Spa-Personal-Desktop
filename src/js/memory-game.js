@@ -139,6 +139,7 @@ class Memory extends window.HTMLElement {
     this.container.style.opacity = 1
     this.zIndex += 1
     this.container.style.zIndex = this.zIndex
+    console.log(this.zIndex)
   }
 
   clean () {
