@@ -3,20 +3,21 @@ import './memory-game.js'
 import './weather.js'
 import './templates.js'
 
+const Z_INDEX_OFFSET = 20
 let apps = []
-
+let game = document.querySelector('#game')
 let button = document.querySelector('#button')
+let buttonW = document.querySelector('#weather')
+
 button.addEventListener('click', e => {
   e.preventDefault()
   let gameDiv = document.querySelector('#game')
   let memo = document.createElement('memory-game')
-  memo.classList.add('bottom')
   gameDiv.appendChild(memo)
   apps.push(memo)
-  // console.log(apps)
+  updateZindex()
 })
 
-let buttonW = document.querySelector('#weather')
 buttonW.addEventListener('click', e => {
   e.preventDefault()
 
@@ -24,22 +25,38 @@ buttonW.addEventListener('click', e => {
   let weatherApp = document.createElement('weather-app')
   weatherdiv.appendChild(weatherApp)
   apps.push(weatherApp)
+  updateZindex()
 })
 
-window.addEventListener('click', e => {
-  // console.log(e.target)
-  for (let i = 0; i < apps.length; i++) {
-    if (e.target.classList.contains('bottom')) {
-      apps[i].classList.add('top')
-      apps[i].classList.remove('bottom')
-      console.log(e.target)
-    }
-    if (e.target.classList.contains('top')) {
-      apps[i].classList.remove('top')
-      apps[i].classList.add('bottom')
-    }
-  }
+game.addEventListener('click', e => {
+  let index = apps.indexOf(e.target)
+  let tempApp = apps[index]
+  apps.splice(index, 1)
+  apps.push(tempApp)
+  updateZindex()
 })
+
+function getContainer (dragable) {
+  return dragable.shadowRoot
+    .querySelector('drageble-tag')
+    .shadowRoot.querySelector('#container')
+}
+
+function updateZindex () {
+  for (let i = 0; i < apps.length; i++) {
+    getContainer(apps[i]).style.zIndex = Z_INDEX_OFFSET + i
+  }
+}
+
+function close () {
+  let closeButton = apps.shadowRoot.querySelector('border-top img')
+  console.log(closeButton)
+  closeButton.addEventListener('click', e => {
+
+  })
+}
+let closeButton = apps.shadowRoot.querySelector('border-top img')
+console.log(closeButton)
 
 // window.addEventListener('click', e => {
 //   let windowhand = document.querySelector('#game')
