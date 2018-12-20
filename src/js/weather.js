@@ -15,15 +15,19 @@ class Weather extends window.HTMLElement {
     this.city = this.shadowRoot.querySelector('#city')
   }
 
+  connectedCallback () {
+    this.getInputValue()
+  }
+
   async getWeather () {
     this.weather = await window.fetch(this.api + this.city.value + this.units + this.aipKey)
     this.weather = await this.weather.json()
-    console.log(this.weather.main.temp)
+    this.shadowRoot.querySelector('#temp').textContent = `${this.weather.main.temp}°C`
+    // this.shadowRoot.querySelector('#imgW').textContent = `${this.weather.weather[0].icon}.png`
   }
 
   getInputValue () {
     let submit = this.shadowRoot.querySelector('#submit')
-    console.log(submit)
 
     submit.addEventListener('click', e => {
       this.getWeather()

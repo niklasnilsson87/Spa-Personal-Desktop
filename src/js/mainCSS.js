@@ -66,10 +66,14 @@ p {
 }
 
 #disp {
+  margin-top: 20px;
   display: inline-block;
 }
 
 #temp {
+  padding: 0;
+  font-size: 40px;
+  text-align: center;
   display: inline-block;
   margin: 0 auto;
   border-radius: 16px;
@@ -80,11 +84,19 @@ p {
 
 #imgW {
   display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
   margin: 0 auto;
   border-radius: 16px;
   width: 130px;
   height: 60px;
   background-image: linear-gradient(to bottom right, white, orange);
+}
+
+#imgW img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
 `

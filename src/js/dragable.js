@@ -50,8 +50,8 @@ class Drageble extends window.HTMLElement {
   onMouseUp (e) {
     this.isMouseDown = false
     this.container.style.opacity = 1
-    this.zIndex += 1
-    this.container.style.zIndex = this.zIndex
+    // this.zIndex += 1
+    // this.container.style.zIndex = this.zIndex
   }
 
   clean () {

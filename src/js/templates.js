@@ -27,9 +27,9 @@ weatherTemplate.innerHTML = /* html */ `
         <button id="submit">Submit</button>
         <div id="disp">
           <div id="temp"></div>
-          <div id="imgW"></div>
-          <div id="temp"></div>
-          <div id="imgW"></div>
+          <div id="imgW"><img src="http://openweathermap.org/img/w/10d.png" alt="weather icon" /></div>
+          <div id="temp2"></div>
+          <div id="imgW2"></div>
         </div>
     </div>
   </drageble-tag>
