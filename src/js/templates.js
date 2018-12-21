@@ -21,16 +21,16 @@ weatherTemplate.innerHTML = /* html */ `
 
   <drageble-tag>
     <div id="weather">
-        <h1>Weather</h1>
-
-          Enter City:<input id="city" value="kalmar" />
-        <button id="submit">Submit</button>
-        <div id="disp">
-          <div id="temp"></div>
-          <div id="imgW"><img src="http://openweathermap.org/img/w/10d.png" alt="weather icon" /></div>
-          <div id="temp2"></div>
-          <div id="imgW2"></div>
-        </div>
+      <h1>Weather</h1>
+      <p class='weather_p'>Enter City:<input id="city" value="kalmar" /></p>
+      <button id="submit">Submit</button>
+      <div id="disp">
+        <p id="condition1" class="condition"></p>
+        <p id="condition2" class="condition"></p>
+        <p id="dispCity"></p>
+        <p id="temp"></p>
+          
+      </div>
     </div>
   </drageble-tag>
 `

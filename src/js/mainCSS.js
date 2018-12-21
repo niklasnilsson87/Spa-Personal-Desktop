@@ -49,6 +49,11 @@ p {
   cursor: default;
 }
 
+.weather_p {
+  float: left;
+  font-family: helvetica;
+}
+
 #border-top img {
   float: right;
   width: 15px;
@@ -61,42 +66,39 @@ p {
   border-bottom-right-radius: 16px;
   margin: 0 auto;
   padding: 30px;
-  width: 300px;
+  width: 400px;
   background-image: linear-gradient(to bottom right, lightblue, lightgreen);
 }
 
 #disp {
-  margin-top: 20px;
-  display: inline-block;
-}
-
-#temp {
-  padding: 0;
+  padding: 20px;
   font-size: 40px;
   text-align: center;
   display: inline-block;
   margin: 0 auto;
   border-radius: 16px;
-  width: 130px;
-  height: 60px;
+  width: 80%;
   background-image: linear-gradient(to bottom right, white, lightblue);
 }
 
-#imgW {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin: 0 auto;
-  border-radius: 16px;
-  width: 130px;
-  height: 60px;
-  background-image: linear-gradient(to bottom right, white, orange);
+#dispCity {
+  float: left;
+  font-size: 40px;
 }
 
-#imgW img {
+#temp {
+ float: left;
+}
+
+.condition {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 10px;
+  float: right;
+  font-size: 20px;
+}
+
+#temp img {
+  width: 70px;
 }
 </style>
 `

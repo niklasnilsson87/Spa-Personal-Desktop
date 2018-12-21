@@ -48,15 +48,15 @@ function updateZindex () {
   }
 }
 
-function close () {
-  let closeButton = apps.shadowRoot.querySelector('border-top img')
-  console.log(closeButton)
-  closeButton.addEventListener('click', e => {
+// function close () {
+//   let closeButton = apps.shadowRoot.querySelector('border-top img')
+//   console.log(closeButton)
+//   closeButton.addEventListener('click', e => {
 
-  })
-}
-let closeButton = apps.shadowRoot.querySelector('border-top img')
-console.log(closeButton)
+//   })
+// }
+// let closeButton = apps.shadowRoot.querySelector('border-top img')
+// console.log(closeButton)
 
 // window.addEventListener('click', e => {
 //   let windowhand = document.querySelector('#game')
