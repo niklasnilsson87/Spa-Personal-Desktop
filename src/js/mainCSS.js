@@ -140,6 +140,11 @@ p {
 #city {
   
 }
+
+#chatApp {
+  width: 460px;
+  height: 300px;
+}
 </style>
 `
 export {

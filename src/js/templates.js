@@ -49,7 +49,35 @@ dragTemplate.innerHTML = /* html */ `
   </div>
 
 `
+
+const chatTemplate = document.createElement('template')
+chatTemplate.innerHTML = /* html */ `
+
+  <drageble-tag>
+    <div id="chatApp">
+      <h1>chat</h1>
+
+        <div id="chatcontainer"></div>
+
+          
+            <div class="chat">
+              <div class="messages">
+                <template>
+                  <div class="message">
+                    <p class="text"></p>
+                    <p class="autor"></p>
+                  </div>
+                </template>
+              </div>
+              <textarea class="messageArea"></textarea>
+            </div>
+         
+
+    </div>
+  </drageble-tag>
+`
 export {
+  chatTemplate,
   memoryTemplate,
   weatherTemplate,
   dragTemplate

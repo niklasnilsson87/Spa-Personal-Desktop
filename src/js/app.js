@@ -1,6 +1,7 @@
 import './dragable.js'
 import './memory-game.js'
 import './weather.js'
+import './chat.js'
 import './templates.js'
 
 const Z_INDEX_OFFSET = 20
@@ -8,10 +9,20 @@ const Z_INDEX_OFFSET = 20
 // const OFFSET_TOP = 40
 let apps = []
 let game = document.querySelector('#game')
-let button = document.querySelector('#button')
-let buttonW = document.querySelector('#weather')
+let buttonMemory = document.querySelector('#button')
+let buttonWeather = document.querySelector('#weather')
+let buttonChat = document.querySelector('#chat')
 
-button.addEventListener('click', e => {
+buttonChat.addEventListener('click', e => {
+  e.preventDefault()
+  let game = document.querySelector('#game')
+  let chat = document.createElement('chat-app')
+  game.appendChild(chat)
+  apps.push(chat)
+  updateZindex()
+})
+
+buttonMemory.addEventListener('click', e => {
   e.preventDefault()
   let gameDiv = document.querySelector('#game')
   let memo = document.createElement('memory-game')
@@ -19,10 +30,10 @@ button.addEventListener('click', e => {
   gameDiv.appendChild(memo)
   apps.push(memo)
   updateZindex()
-  close()
+  // close()
 })
 
-buttonW.addEventListener('click', e => {
+buttonWeather.addEventListener('click', e => {
   e.preventDefault()
 
   let weatherdiv = document.querySelector('#game')
@@ -53,23 +64,23 @@ function updateZindex () {
   }
 }
 
-function close () {
-  for (let i = 0; i < apps.length; i++) {
-    apps[i].shadowRoot
-      .querySelector('drageble-tag')
-      .shadowRoot.querySelector('#border-top a').addEventListener('click', e => {
-        e.preventDefault()
+// function close () {
+//   for (let i = 0; i < apps.length; i++) {
+//     apps[i].shadowRoot
+//       .querySelector('drageble-tag')
+//       .shadowRoot.querySelector('#border-top a').addEventListener('click', e => {
+//         e.preventDefault()
 
-        let getclose = document.querySelector('#game')
-        console.log(getclose)
-        let classClose = document.querySelector('.close')
-        console.log(apps)
-        apps.pop()
-        getclose.removeChild(classClose)
-        e.stopPropagation()
-      })
-  }
-}
+//         let getclose = document.querySelector('#game')
+//         console.log(getclose)
+//         let classClose = document.querySelector('.close')
+//         console.log(apps)
+//         apps.pop()
+//         getclose.removeChild(classClose)
+//         e.stopPropagation()
+//       })
+//   }
+// }
 
 // function getCloseButton (closeB) {
 //   return closeB.shadowRoot
