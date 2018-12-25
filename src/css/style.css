@@ -6,12 +6,6 @@ body {
 
 #game {
   position: absolute;
-}
-
-.bottom {
-  z-index: 0;
-}
-
-.top {
-  z-index: 20;
+  left: 200px;
+  top: 100px;
 }

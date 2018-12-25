@@ -4,6 +4,8 @@ import './weather.js'
 import './templates.js'
 
 const Z_INDEX_OFFSET = 20
+// const OFFSET_LEFT = 40
+// const OFFSET_TOP = 40
 let apps = []
 let game = document.querySelector('#game')
 let button = document.querySelector('#button')
@@ -13,9 +15,11 @@ button.addEventListener('click', e => {
   e.preventDefault()
   let gameDiv = document.querySelector('#game')
   let memo = document.createElement('memory-game')
+  memo.setAttribute('class', 'close')
   gameDiv.appendChild(memo)
   apps.push(memo)
   updateZindex()
+  close()
 })
 
 buttonW.addEventListener('click', e => {
@@ -23,6 +27,7 @@ buttonW.addEventListener('click', e => {
 
   let weatherdiv = document.querySelector('#game')
   let weatherApp = document.createElement('weather-app')
+  weatherApp.setAttribute('class', 'close')
   weatherdiv.appendChild(weatherApp)
   apps.push(weatherApp)
   updateZindex()
@@ -48,25 +53,26 @@ function updateZindex () {
   }
 }
 
-// function close () {
-//   let closeButton = apps.shadowRoot.querySelector('border-top img')
-//   console.log(closeButton)
-//   closeButton.addEventListener('click', e => {
+function close () {
+  for (let i = 0; i < apps.length; i++) {
+    apps[i].shadowRoot
+      .querySelector('drageble-tag')
+      .shadowRoot.querySelector('#border-top a').addEventListener('click', e => {
+        e.preventDefault()
 
-//   })
+        let getclose = document.querySelector('#game')
+        console.log(getclose)
+        let classClose = document.querySelector('.close')
+        console.log(apps)
+        apps.pop()
+        getclose.removeChild(classClose)
+        e.stopPropagation()
+      })
+  }
+}
+
+// function getCloseButton (closeB) {
+//   return closeB.shadowRoot
+//     .querySelector('drageble-tag')
+//     .shadowRoot.querySelector('#border-top a')
 // }
-// let closeButton = apps.shadowRoot.querySelector('border-top img')
-// console.log(closeButton)
-
-// window.addEventListener('click', e => {
-//   let windowhand = document.querySelector('#game')
-//   let targets = (e.target.classList.contains('bottom'))
-//   if (targets === true) {
-//     let child = windowhand.children
-//     console.log(child)
-//     e.target.classList.add('top')
-//     e.target.classList.remove('bottom')
-//   }
-// })
-
-// if (apps.length > 0) gameDiv.removeChild(apps.pop())

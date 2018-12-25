@@ -25,8 +25,11 @@ weatherTemplate.innerHTML = /* html */ `
       <p class='weather_p'>Enter City:<input id="city" value="kalmar" /></p>
       <button id="submit">Submit</button>
       <div id="disp">
-        <p id="condition1" class="condition"></p>
-        <p id="condition2" class="condition"></p>
+        <div id="cont1">
+          <p id="condition1" class="condition"></p>
+          <p id="condition3" class="condition"></p>
+          <p id="condition2" class="condition"></p>
+        </div>
         <p id="dispCity"></p>
         <p id="temp"></p>
           
@@ -39,7 +42,7 @@ const dragTemplate = document.createElement('template')
 dragTemplate.innerHTML = /* html */ `
 
   <div id="container">
-  <div id="border-top"><a href="#"><img src="./image/Cbutton2.png" alt="closing button" /></a></div>
+  <div id="border-top"><a href="#"><img src="./image/Cbutton2.png" class="close_button" alt="closing button" /></a></div>
   <slot></slot>
   
   </div>

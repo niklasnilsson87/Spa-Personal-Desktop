@@ -17,9 +17,7 @@ class Weather extends window.HTMLElement {
     this.dispCity = this.shadowRoot.querySelector('#dispCity')
     this.condition1 = this.shadowRoot.querySelector('#condition1')
     this.condition2 = this.shadowRoot.querySelector('#condition2')
-  }
-
-  connectedCallback () {
+    this.condition3 = this.shadowRoot.querySelector('#condition3')
     this.getWeather()
     this.getInputValue()
   }
@@ -27,14 +25,17 @@ class Weather extends window.HTMLElement {
   async getWeather () {
     this.weather = await window.fetch(this.api + this.city.value + this.units + this.aipKey + this.language)
     this.weather = await this.weather.json()
-    this.tempID.textContent = `${this.weather.main.temp}°C`
+    this.tempID.textContent = `${Math.floor(this.weather.main.temp)}°C`
+    console.log(this.weather.cod)
     this.img = document.createElement('img')
     this.img.src = `http://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`
     this.img.alt = 'weather icon'
+    this.img.classList = 'weather_img'
     this.tempID.appendChild(this.img)
     this.dispCity.textContent = this.weather.name
     this.condition1.textContent = `Luftfuktighet: ${this.weather.main.humidity}%`
     this.condition2.textContent = this.weather.weather[0].description
+    this.condition3.textContent = `Vind: ${this.weather.wind.speed} m/s`
   }
 
   getInputValue () {

@@ -6,7 +6,6 @@ class Drageble extends window.HTMLElement {
     super()
     this.mouseOffset = { x: 0, y: 0 }
     this.isMouseDown = false
-    this.zIndex = 0
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(dragTemplate.content.cloneNode(true))
@@ -26,7 +25,7 @@ class Drageble extends window.HTMLElement {
       this.onMouseUp(e)
     })
     this.closeButton.addEventListener('click', (e) => {
-      this.clean()
+      e.preventDefault()
     })
   }
 
@@ -50,17 +49,12 @@ class Drageble extends window.HTMLElement {
   onMouseUp (e) {
     this.isMouseDown = false
     this.container.style.opacity = 1
-    // this.zIndex += 1
-    // this.container.style.zIndex = this.zIndex
   }
 
   clean () {
-    let game = document.querySelector('#game')
-    console.log(game)
-    // while (this.shadowRoot.firstChild) {
-    //   this.shadowRoot.removeChild(this.shadowRoot.firstChild)
-    // }
-    game.removeChild(this)
+    while (this.shadowRoot.firstChild) {
+      this.shadowRoot.removeChild(this.shadowRoot.firstChild)
+    }
   }
 }
 
