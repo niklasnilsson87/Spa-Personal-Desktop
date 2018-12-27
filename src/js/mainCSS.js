@@ -52,16 +52,15 @@ p {
 }
 
 #submit {
-  margin: 20px 20px 0px;
   display: inline-block;
   padding: 15px 25px;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+  background-color: #00FF7F;
   border: none;
   border-radius: 15px;
   box-shadow: 0 3px #999;
@@ -99,6 +98,10 @@ p {
   background-image: linear-gradient(to bottom right, lightblue, lightgreen);
 }
 
+#weather h1 {
+  margin-bottom: 30px;
+}
+
 #disp {
   padding: 20px;
   font-size: 40px;
@@ -127,7 +130,7 @@ p {
 }
 
 .condition {
-  display: block;
+  display: inline-block;
   font-family: cursive;
   font-size: 16px;
 }
@@ -138,7 +141,20 @@ p {
 }
 
 #city {
-  
+  margin-top: 10px;
+  margin-right: 20px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid black;
+  background: none;
+  transition: .5s ease;
+}
+
+#city:focus {
+  box-shadow: none;
+  border-bottom: 2px solid #222;
+  outline: none;
+  transition: 0.4s ease-in-out;
 }
 
 #chatApp {

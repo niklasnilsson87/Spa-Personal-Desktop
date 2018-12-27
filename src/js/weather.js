@@ -25,8 +25,28 @@ class Weather extends window.HTMLElement {
   async getWeather () {
     this.weather = await window.fetch(this.api + this.city.value + this.units + this.aipKey + this.language)
     this.weather = await this.weather.json()
+
+    if (this.weather.cod === 200) {
+      this.createContent()
+    } else {
+      this.getInputValue()
+    }
+  }
+
+  getInputValue () {
+    let submit = this.shadowRoot.querySelector('#submit')
+
+    submit.addEventListener('click', e => {
+      e.preventDefault()
+      this.getWeather()
+    })
+  }
+
+  createContent () {
+    if (this.img) {
+      this.img.src = ''
+    }
     this.tempID.textContent = `${Math.floor(this.weather.main.temp)}°C`
-    console.log(this.weather.cod)
     this.img = document.createElement('img')
     this.img.src = `http://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`
     this.img.alt = 'weather icon'
@@ -37,18 +57,5 @@ class Weather extends window.HTMLElement {
     this.condition2.textContent = this.weather.weather[0].description
     this.condition3.textContent = `Vind: ${this.weather.wind.speed} m/s`
   }
-
-  getInputValue () {
-    let submit = this.shadowRoot.querySelector('#submit')
-
-    submit.addEventListener('click', e => {
-      e.preventDefault()
-      if (this.img) {
-        this.img.src = ''
-      }
-      this.getWeather()
-    })
-  }
 }
-
 window.customElements.define('weather-app', Weather)
