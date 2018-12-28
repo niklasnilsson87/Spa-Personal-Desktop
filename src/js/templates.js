@@ -64,8 +64,8 @@ chatTemplate.innerHTML = /* html */ `
               <div class="messages">
                 <template>
                   <div class="message">
+                    <p class="autor"></p><br>
                     <p class="text"></p>
-                    <p class="autor"></p>
                   </div>
                 </template>
               </div>

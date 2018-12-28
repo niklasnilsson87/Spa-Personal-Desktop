@@ -10,6 +10,8 @@ class Chat extends window.HTMLElement {
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(chatTemplate.content.cloneNode(true))
     this.chatDiv = this.shadowRoot.querySelector('#chatApp')
+    this.date = new Date().toLocaleTimeString() + ' ' + new Date().toDateString()
+    console.log(this.date)
     this.connectChat().then(socket => {
       this.sendMessage()
     })
@@ -63,20 +65,39 @@ class Chat extends window.HTMLElement {
     }).catch(error => {
       console.log('something went wrog', error)
     })
-    console.log('sending message', text)
   }
 
   printMessage (message) {
     let template = this.chatDiv.querySelectorAll('template')[0]
-    console.log(template)
 
     let messageDiv = document.importNode(template.content.firstElementChild, true)
-    console.log(messageDiv)
-    messageDiv.querySelectorAll('.text')[0].textContent = message.data
-    messageDiv.querySelectorAll('.autor')[0].textContent = message.username
 
-    this.shadowRoot.querySelectorAll('.messages')[0].appendChild(messageDiv)
+    messageDiv.querySelectorAll('.text')[0].textContent = message.data
+    messageDiv.querySelectorAll('.autor')[0].textContent = `${message.username} ${this.date}`
+
+    let printDiv = this.shadowRoot.querySelectorAll('.messages')[0]
+    printDiv.appendChild(messageDiv)
+
+    // starts scrollbar at bottom of div.
+    let elementHeight = printDiv.scrollHeight
+    printDiv.scrollTop = elementHeight
+    this.storage(message.username, message.data)
+  }
+
+  storage (username, data) {
+    const result = {
+      username: username,
+      data: data,
+      date: new Date().toLocaleTimeString()
+    }
+
+    const savedScores = window.localStorage.getItem('highscore') || '[]'
+
+    const highscores = [...JSON.parse(savedScores), result]
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, 5)
+
+    window.localStorage.setItem('highscore', JSON.stringify(highscores))
   }
 }
-
 window.customElements.define('chat-app', Chat)

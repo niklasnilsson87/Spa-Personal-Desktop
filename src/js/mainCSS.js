@@ -158,8 +158,79 @@ p {
 }
 
 #chatApp {
+  background-image: linear-gradient(to bottom right, lightblue, lightgreen);
   width: 460px;
   height: 300px;
+}
+
+.messages {
+  border-bottom: 1px solid;
+  display: block;
+  height: 200px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.message {
+  display: table;
+  margin-bottom: 15px;
+}
+
+.messageArea {
+  outline: none;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 2px;
+  left: 30px;
+  width: 400px;
+  height: 50px;
+}
+
+.text {
+  text-align: left;
+  float: left;
+  background-color: lightblue;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 10px;
+}
+
+.autor {
+  float: left;
+  background-color: lightgray;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 10px;
+}
+
+::-webkit-scrollbar{
+    width: 16px;
+    height: 10px;
+    margin-right:2px;
+    border-radius:20px;
+
+
+}
+::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+    border: 1px solid lightblue;
+    background: lightblue;
+    border-radius: 30px;
+    margin-right:2px;
+
+}
+::-webkit-scrollbar-thumb{
+    border-radius:20px;
+    height: 30px;
+    width: 8px;
+    border: 1px solid lightblue;
+    background: rgb(111,111,111);
+    background: -webkit-linear-gradient(#e66465, #9198e5);
+}
+::-webkit-scrollbar-track-piece {
+    height: 30px;
+    width: 30px;
+    border-radius:20px;
 }
 </style>
 `
