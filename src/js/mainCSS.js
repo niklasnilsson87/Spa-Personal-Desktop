@@ -157,7 +157,7 @@ p {
   transition: 0.4s ease-in-out;
 }
 
-#chatApp {
+.chatApp {
   background-image: linear-gradient(to bottom right, lightblue, lightgreen);
   width: 460px;
   height: 300px;
@@ -202,6 +202,10 @@ p {
   margin: 0px;
   padding: 10px;
   font-size: 12px;
+}
+
+#card {
+  text-align: center;
 }
 
 ::-webkit-scrollbar{

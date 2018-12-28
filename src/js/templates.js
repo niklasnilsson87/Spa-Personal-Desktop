@@ -54,11 +54,10 @@ const chatTemplate = document.createElement('template')
 chatTemplate.innerHTML = /* html */ `
 
   <drageble-tag>
-    <div id="chatApp">
+    <div class="chatApp">
       <h1>chat</h1>
 
-        <div id="chatcontainer"></div>
-
+        <div class="chatcontainer"></div>
           
             <div class="chat">
               <div class="messages">
@@ -72,11 +71,28 @@ chatTemplate.innerHTML = /* html */ `
               <textarea class="messageArea"></textarea>
             </div>
          
-
-    </div>
+        </div>
   </drageble-tag>
 `
+
+const welcomeTemplate = document.createElement('template')
+welcomeTemplate.innerHTML = /* html */ `
+
+  <drageble-tag>
+    <div class="chatApp">
+      <h1>chat</h1>
+
+      <div id="card">
+        <h2 id="welcome">Welcome to the chat</h2>
+        <h3>Select your user name</h3>
+              <input id="startInput" type="text" name="NickName">
+            <button id="start_chat_button">Submit</button>
+      </div>
+    </div>
+  </drageble-tag>
+  `
 export {
+  welcomeTemplate,
   chatTemplate,
   memoryTemplate,
   weatherTemplate,
