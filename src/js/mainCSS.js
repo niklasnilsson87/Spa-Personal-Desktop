@@ -201,6 +201,7 @@ p {
   border-radius: 5px;
   margin: 0px;
   padding: 10px;
+  font-size: 12px;
 }
 
 ::-webkit-scrollbar{

@@ -12,6 +12,7 @@ class Chat extends window.HTMLElement {
     this.chatDiv = this.shadowRoot.querySelector('#chatApp')
     this.date = new Date().toLocaleTimeString() + ' ' + new Date().toDateString()
     console.log(this.date)
+    this.getStorage()
     this.connectChat().then(socket => {
       this.sendMessage()
     })
@@ -75,29 +76,42 @@ class Chat extends window.HTMLElement {
     messageDiv.querySelectorAll('.text')[0].textContent = message.data
     messageDiv.querySelectorAll('.autor')[0].textContent = `${message.username} ${this.date}`
 
-    let printDiv = this.shadowRoot.querySelectorAll('.messages')[0]
-    printDiv.appendChild(messageDiv)
+    this.printDiv = this.shadowRoot.querySelectorAll('.messages')[0]
+    this.printDiv.appendChild(messageDiv)
 
     // starts scrollbar at bottom of div.
-    let elementHeight = printDiv.scrollHeight
-    printDiv.scrollTop = elementHeight
+    let elementHeight = this.printDiv.scrollHeight
+    this.printDiv.scrollTop = elementHeight
     this.storage(message.username, message.data)
   }
 
   storage (username, data) {
-    const result = {
+    const history = {
       username: username,
       data: data,
       date: new Date().toLocaleTimeString()
     }
 
-    const savedScores = window.localStorage.getItem('highscore') || '[]'
+    const saveddata = window.localStorage.getItem('chat') || '[]'
 
-    const highscores = [...JSON.parse(savedScores), result]
+    const chatHistory = [...JSON.parse(saveddata), history]
       .sort((a, b) => b.date.localeCompare(a.date))
-      .slice(0, 5)
+      .slice(0, 10)
 
-    window.localStorage.setItem('highscore', JSON.stringify(highscores))
+    window.localStorage.setItem('chat', JSON.stringify(chatHistory))
+  }
+
+  getStorage () {
+    console.log('hej')
+    if (window.localStorage.getItem('chat')) {
+      console.log('inne')
+      let messages = window.localStorage.getItem('chat')
+      this.messages = JSON.parse(messages)
+
+      for (let i = 0; i < this.messages.length; i++) {
+        this.printMessage(this.messages[i])
+      }
+    }
   }
 }
 window.customElements.define('chat-app', Chat)
