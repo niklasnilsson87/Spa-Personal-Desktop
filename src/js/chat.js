@@ -4,7 +4,7 @@ import { mainCSS } from './mainCSS.js'
 class Chat extends window.HTMLElement {
   constructor () {
     super()
-    console.log(this.checkCookie())
+    // console.log(this.checkCookie())
     this.socket = null
     this.apiKey = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     this.attachShadow({ mode: 'open' })
@@ -17,9 +17,9 @@ class Chat extends window.HTMLElement {
       this.nickname = this.shadowRoot.querySelector('#startInput').value
       // this.cookie = document.cookie =
       // console.log(this.cookie)
-      console.log(document.cookie)
-      this.setCookie(`username`, `${this.nickname}`)
-      console.log(this.checkCookie())
+      // console.log(document.cookie)
+      // this.setCookie(`username`, `${this.nickname}`)
+      // console.log(this.checkCookie())
       if (this.nickname) {
         this.StartChat()
       }
@@ -125,7 +125,7 @@ class Chat extends window.HTMLElement {
       let messages = window.localStorage.getItem('chat')
       this.messages = JSON.parse(messages)
 
-      for (let i = 0; i < this.messages.length; i++) {
+      for (let i = this.messages.length - 1; i >= 0; i--) {
         this.printMessage(this.messages[i])
       }
     }
@@ -137,38 +137,38 @@ class Chat extends window.HTMLElement {
     }
   }
 
-  setCookie (cname, cvalue, exdays) {
-    let d = new Date()
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
-    let expires = 'expires=' + d.toUTCString()
-    document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
-  }
+  // setCookie (cname, cvalue, exdays) {
+  //   let d = new Date()
+  //   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+  //   let expires = 'expires=' + d.toUTCString()
+  //   document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
+  // }
 
-  getCookie (cname) {
-    let name = cname + '='
-    let ca = document.cookie.split(';')
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i]
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1)
-      }
-      if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length)
-      }
-    }
-    return ''
-  }
+  // getCookie (cname) {
+  //   let name = cname + '='
+  //   let ca = document.cookie.split(';')
+  //   for (var i = 0; i < ca.length; i++) {
+  //     var c = ca[i]
+  //     while (c.charAt(0) === ' ') {
+  //       c = c.substring(1)
+  //     }
+  //     if (c.indexOf(name) === 0) {
+  //       return c.substring(name.length, c.length)
+  //     }
+  //   }
+  //   return ''
+  // }
 
-  checkCookie () {
-    var user = this.getCookie('username')
-    if (user !== '') {
-      console.log('Welcome again ' + user)
-    } else {
-      user = console.log('Please enter your name:', '')
-      if (user !== '' && user != null) {
-        this.setCookie('username', user, 365)
-      }
-    }
-  }
+  // checkCookie () {
+  //   var user = this.getCookie('username')
+  //   if (user !== '') {
+  //     console.log('Welcome again ' + user)
+  //   } else {
+  //     user = console.log('Please enter your name:', '')
+  //     if (user !== '' && user != null) {
+  //       this.setCookie('username', user, 365)
+  //     }
+  //   }
+  // }
 }
 window.customElements.define('chat-app', Chat)

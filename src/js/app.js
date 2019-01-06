@@ -20,6 +20,7 @@ buttonChat.addEventListener('click', e => {
   game.appendChild(chat)
   apps.push(chat)
   updateZindex()
+  // close()
 })
 
 buttonMemory.addEventListener('click', e => {
@@ -42,6 +43,7 @@ buttonWeather.addEventListener('click', e => {
   weatherdiv.appendChild(weatherApp)
   apps.push(weatherApp)
   updateZindex()
+  // close()
 })
 
 game.addEventListener('click', e => {
@@ -73,10 +75,10 @@ function updateZindex () {
 
 //         let getclose = document.querySelector('#game')
 //         console.log(getclose)
-//         let classClose = document.querySelector('.close')
+//         // let classClose = document.querySelector('.close')
 //         console.log(apps)
 //         apps.pop()
-//         getclose.removeChild(classClose)
+//         getclose.removeChild(e)
 //         e.stopPropagation()
 //       })
 //   }
