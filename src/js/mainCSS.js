@@ -29,6 +29,7 @@ h1 {
 }
 
 #memoryContainer {
+  background-image: linear-gradient(to bottom right, lightblue, lightgreen);
   padding: 30px;
   margin: 0 auto;
   width: 300px;
@@ -42,6 +43,11 @@ h1 {
   visibility: hidden;
 }
 
+.win {
+  margin-top: 10px;
+  font-size: 20px
+}
+
 p {
   float: right;
   margin: 0;
@@ -51,7 +57,7 @@ p {
   cursor: default;
 }
 
-#submit {
+.submit {
   display: inline-block;
   padding: 15px 25px;
   font-size: 18px;
@@ -66,11 +72,11 @@ p {
   box-shadow: 0 3px #999;
 }
 
-#submit:hover {
+.submit:hover {
   background-color: #add8e6
 }
 
-#submit:active {
+.submit:active {
   background-color: #3e8e41;
   box-shadow: 0 2px #666;
   transform: translateY(4px);
@@ -98,6 +104,7 @@ p {
 }
 
 #weather h1 {
+  font-family: "Segoe print", Arial, Helvetica, sans-serif;
   margin-bottom: 30px;
 }
 
@@ -164,6 +171,7 @@ p {
 }
 
 .messages {
+  margin-left: 20px;
   border-bottom: 1px solid;
   display: block;
   height: 300px;
@@ -189,8 +197,7 @@ p {
 .text {
   text-align: left;
   float: left;
-  background-color: lightblue;
-  border-radius: 5px;
+  font-family: sans-serif;
   margin: 0px;
   padding: 10px;
 }
@@ -202,6 +209,7 @@ p {
   margin: 0px;
   padding: 10px;
   font-size: 12px;
+  font-family: monospace;
 }
 
 #card {

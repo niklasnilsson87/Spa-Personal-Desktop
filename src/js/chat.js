@@ -4,26 +4,32 @@ import { mainCSS } from './mainCSS.js'
 class Chat extends window.HTMLElement {
   constructor () {
     super()
-    // console.log(this.checkCookie())
     this.socket = null
     this.apiKey = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     this.attachShadow({ mode: 'open' })
-    this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
-    this.shadowRoot.appendChild(welcomeTemplate.content.cloneNode(true))
-    this.inputButton = this.shadowRoot.querySelector('#start_chat_button')
-    this.input = this.shadowRoot.querySelector('#startInput')
-    this.inputButton.addEventListener('click', e => {
-      e.preventDefault()
-      this.nickname = this.shadowRoot.querySelector('#startInput').value
-      // this.cookie = document.cookie =
-      // console.log(this.cookie)
-      // console.log(document.cookie)
-      // this.setCookie(`username`, `${this.nickname}`)
-      // console.log(this.checkCookie())
-      if (this.nickname) {
-        this.StartChat()
-      }
-    })
+    if (window.localStorage.hasOwnProperty('user')) {
+      let id = window.localStorage.getItem(`user`)
+      let user = JSON.parse(id)
+      console.log(user.username)
+      this.nickname = user.username
+      console.log(this.nickname)
+      this.startChat()
+    } else {
+      this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
+      this.shadowRoot.appendChild(welcomeTemplate.content.cloneNode(true))
+      this.inputButton = this.shadowRoot.querySelector('#start_chat_button')
+      this.input = this.shadowRoot.querySelector('#startInput')
+
+      this.inputButton.addEventListener('click', e => {
+        e.preventDefault()
+        this.nickname = this.shadowRoot.querySelector('#startInput').value
+
+        if (this.nickname) {
+          this.storageUser()
+          this.startChat()
+        }
+      })
+    }
   }
 
   connectChat () {
@@ -85,7 +91,7 @@ class Chat extends window.HTMLElement {
     this.storage(message.username, message.data)
   }
 
-  StartChat () {
+  startChat () {
     this.clean()
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(chatTemplate.content.cloneNode(true))
@@ -94,6 +100,7 @@ class Chat extends window.HTMLElement {
     this.connectChat().then(socket => {
       this.sendMessage()
     })
+
     this.chatDiv.addEventListener('keypress', (e) => {
       // listen for Enter Key
       if (e.keyCode === 13) {
@@ -131,44 +138,18 @@ class Chat extends window.HTMLElement {
     }
   }
 
+  storageUser () {
+    const user = {
+      username: this.nickname
+    }
+
+    window.localStorage.setItem('user', JSON.stringify(user))
+  }
+
   clean () {
     while (this.shadowRoot.firstChild) {
       this.shadowRoot.removeChild(this.shadowRoot.firstChild)
     }
   }
-
-  // setCookie (cname, cvalue, exdays) {
-  //   let d = new Date()
-  //   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
-  //   let expires = 'expires=' + d.toUTCString()
-  //   document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
-  // }
-
-  // getCookie (cname) {
-  //   let name = cname + '='
-  //   let ca = document.cookie.split(';')
-  //   for (var i = 0; i < ca.length; i++) {
-  //     var c = ca[i]
-  //     while (c.charAt(0) === ' ') {
-  //       c = c.substring(1)
-  //     }
-  //     if (c.indexOf(name) === 0) {
-  //       return c.substring(name.length, c.length)
-  //     }
-  //   }
-  //   return ''
-  // }
-
-  // checkCookie () {
-  //   var user = this.getCookie('username')
-  //   if (user !== '') {
-  //     console.log('Welcome again ' + user)
-  //   } else {
-  //     user = console.log('Please enter your name:', '')
-  //     if (user !== '' && user != null) {
-  //       this.setCookie('username', user, 365)
-  //     }
-  //   }
-  // }
 }
 window.customElements.define('chat-app', Chat)

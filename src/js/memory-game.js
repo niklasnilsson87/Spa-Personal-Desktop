@@ -4,8 +4,8 @@ import { mainCSS } from './mainCSS.js'
 class Memory extends window.HTMLElement {
   constructor () {
     super()
-    this.rows = 4
-    this.cols = 4
+    this.rows = 2
+    this.cols = 2
     this.turn1 = ''
     this.turn2 = ''
     this.lastTile = ''
@@ -67,8 +67,19 @@ class Memory extends window.HTMLElement {
 
         if (this.pair === (this.cols * this.rows) / 2) {
           let p = this.shadowRoot.querySelector('.win')
+          let memorydiv = this.shadowRoot.querySelector('.memory')
+          let container = this.shadowRoot.querySelector('#memoryContainer')
           p.textContent = 'You Won on ' + this.tries + ' number of tries!'
-          console.log('You Won on ' + this.tries + ' number of tries!')
+          let restartButton = document.createElement('button')
+          restartButton.classList = 'submit'
+          p.appendChild(restartButton)
+          restartButton.textContent = 'Restart'
+          restartButton.addEventListener('click', e => {
+            e.preventDefault()
+            p.textContent = ''
+            container.removeChild(memorydiv)
+            this.memory()
+          })
         }
 
         setTimeout(() => {

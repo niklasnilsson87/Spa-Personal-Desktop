@@ -30,13 +30,13 @@ class Weather extends window.HTMLElement {
     if (this.weather.cod === 200) {
       this.createContent()
     } else {
-      this.noExist.textContent = 'city does not exist'
+      this.noExist.textContent = 'Try again'
       this.getInputValue()
     }
   }
 
   getInputValue () {
-    let submit = this.shadowRoot.querySelector('#submit')
+    let submit = this.shadowRoot.querySelector('.submit')
 
     submit.addEventListener('click', e => {
       e.preventDefault()

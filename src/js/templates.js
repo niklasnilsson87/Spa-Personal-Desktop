@@ -24,7 +24,7 @@ weatherTemplate.innerHTML = /* html */ `
       <h1>Weather</h1>
       <p class='weather_p'></p><br>
       <input id="city" value="Kalmar" />
-      <button id="submit">Submit</button>
+      <button class="submit">Submit</button>
       <div id="disp">
         <div id="cont1">
           <p id="condition1" class="condition"></p><br>
