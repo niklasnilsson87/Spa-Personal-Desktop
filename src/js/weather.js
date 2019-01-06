@@ -18,6 +18,7 @@ class Weather extends window.HTMLElement {
     this.condition1 = this.shadowRoot.querySelector('#condition1')
     this.condition2 = this.shadowRoot.querySelector('#condition2')
     this.condition3 = this.shadowRoot.querySelector('#condition3')
+    this.noExist = this.shadowRoot.querySelector('.weather_p')
     this.getWeather()
     this.getInputValue()
   }
@@ -29,6 +30,7 @@ class Weather extends window.HTMLElement {
     if (this.weather.cod === 200) {
       this.createContent()
     } else {
+      this.noExist.textContent = 'city does not exist'
       this.getInputValue()
     }
   }
@@ -38,6 +40,7 @@ class Weather extends window.HTMLElement {
 
     submit.addEventListener('click', e => {
       e.preventDefault()
+      this.noExist.textContent = ''
       this.getWeather()
     })
   }

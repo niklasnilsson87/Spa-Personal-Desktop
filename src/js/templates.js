@@ -22,7 +22,8 @@ weatherTemplate.innerHTML = /* html */ `
   <drageble-tag>
     <div id="weather">
       <h1>Weather</h1>
-      <p class='weather_p'><input id="city" value="Kalmar" /></p>
+      <p class='weather_p'></p><br>
+      <input id="city" value="Kalmar" />
       <button id="submit">Submit</button>
       <div id="disp">
         <div id="cont1">

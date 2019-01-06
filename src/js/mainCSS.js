@@ -62,7 +62,7 @@ p {
   color: #fff;
   background-color: #00FF7F;
   border: none;
-  border-radius: 15px;
+  border-radius: 45px;
   box-shadow: 0 3px #999;
 }
 
@@ -77,7 +77,7 @@ p {
 }
 
 .weather_p {
-  margin: 20px 20px 0px;
+  margin-left: 120px;
   float: left;
   font-family: helvetica;
 }
@@ -92,9 +92,8 @@ p {
 #weather {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  margin: 0 auto;
-  padding: 30px;
-  width: 460px;
+  padding: 10px;
+  width: 480px;
   background-image: linear-gradient(to bottom right, lightblue, lightgreen);
 }
 
@@ -141,6 +140,7 @@ p {
 }
 
 #city {
+  margin-left: 60px;
   margin-top: 10px;
   margin-right: 20px;
   font-size: 18px;
@@ -160,13 +160,13 @@ p {
 .chatApp {
   background-image: linear-gradient(to bottom right, lightblue, lightgreen);
   width: 460px;
-  height: 300px;
+  height: 400px;
 }
 
 .messages {
   border-bottom: 1px solid;
   display: block;
-  height: 200px;
+  height: 300px;
   overflow: auto;
   overflow-x: hidden;
 }
