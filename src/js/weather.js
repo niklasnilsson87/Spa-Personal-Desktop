@@ -12,7 +12,7 @@ class Weather extends window.HTMLElement {
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(weatherTemplate.content.cloneNode(true))
     this.container = this.shadowRoot.querySelector('#container')
-    this.city = this.shadowRoot.querySelector('#city')
+    this.city = this.shadowRoot.querySelector('.city')
     this.tempID = this.shadowRoot.querySelector('#temp')
     this.dispCity = this.shadowRoot.querySelector('#dispCity')
     this.condition1 = this.shadowRoot.querySelector('#condition1')

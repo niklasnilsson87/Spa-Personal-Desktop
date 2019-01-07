@@ -23,16 +23,20 @@ mainCSS.innerHTML = /* html */`
 }
 
 h1 {
+  font-family: "Segoe print", Arial, Helvetica, sans-serif;
   cursor: default;
   margin: 0 auto;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 #memoryContainer {
-  background-image: linear-gradient(to bottom right, lightblue, lightgreen);
+  background-image: linear-gradient(to bottom right, lightblue, rgb(0, 183, 255));
   padding: 30px;
   margin: 0 auto;
   width: 300px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
   }
 
 .memory img {
@@ -100,12 +104,7 @@ p {
   border-bottom-right-radius: 16px;
   padding: 10px;
   width: 480px;
-  background-image: linear-gradient(to bottom right, lightblue, lightgreen);
-}
-
-#weather h1 {
-  font-family: "Segoe print", Arial, Helvetica, sans-serif;
-  margin-bottom: 30px;
+  background-image: linear-gradient(to bottom right, lightblue, rgb(0, 183, 255));
 }
 
 #disp {
@@ -146,7 +145,7 @@ p {
   width: 70px;
 }
 
-#city {
+.city {
   margin-left: 60px;
   margin-top: 10px;
   margin-right: 20px;
@@ -157,7 +156,7 @@ p {
   transition: .5s ease;
 }
 
-#city:focus {
+.city:focus {
   box-shadow: none;
   border-bottom: 2px solid #222;
   outline: none;
@@ -165,16 +164,22 @@ p {
 }
 
 .chatApp {
-  background-image: linear-gradient(to bottom right, lightblue, lightgreen);
+  background-image: linear-gradient(to bottom right, lightblue, rgb(0, 183, 255));
   width: 460px;
-  height: 400px;
+  height: 480px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+#start_chat_button {
+  margin-top: 30px;
 }
 
 .messages {
   margin-left: 20px;
   border-bottom: 1px solid;
   display: block;
-  height: 300px;
+  height: 330px;
   overflow: auto;
   overflow-x: hidden;
 }

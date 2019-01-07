@@ -10,9 +10,7 @@ class Chat extends window.HTMLElement {
     if (window.localStorage.hasOwnProperty('user')) {
       let id = window.localStorage.getItem(`user`)
       let user = JSON.parse(id)
-      console.log(user.username)
       this.nickname = user.username
-      console.log(this.nickname)
       this.startChat()
     } else {
       this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))

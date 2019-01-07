@@ -23,7 +23,7 @@ weatherTemplate.innerHTML = /* html */ `
     <div id="weather">
       <h1>Weather</h1>
       <p class='weather_p'></p><br>
-      <input id="city" value="Kalmar" />
+      <input class="city" value="Kalmar" />
       <button class="submit">Submit</button>
       <div id="disp">
         <div id="cont1">
@@ -86,8 +86,8 @@ welcomeTemplate.innerHTML = /* html */ `
       <div id="card">
         <h2 id="welcome">Welcome to the chat</h2>
         <h3>Select your user name</h3>
-              <input id="startInput" type="text" name="NickName">
-            <button id="start_chat_button">Submit</button>
+              <input id="startInput" class="city" type="text" name="NickName"><br>
+            <button id="start_chat_button" class="submit">Submit</button>
       </div>
     </div>
   </drageble-tag>

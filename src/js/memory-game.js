@@ -4,8 +4,8 @@ import { mainCSS } from './mainCSS.js'
 class Memory extends window.HTMLElement {
   constructor () {
     super()
-    this.rows = 2
-    this.cols = 2
+    this.rows = 4
+    this.cols = 4
     this.turn1 = ''
     this.turn2 = ''
     this.lastTile = ''
@@ -36,6 +36,7 @@ class Memory extends window.HTMLElement {
       a.firstElementChild.setAttribute('data-bricknumber', index)
       div.appendChild(a)
     })
+
     div.addEventListener('click', (e) => {
       e.preventDefault()
       let img = e.target.nodeName === 'IMG' ? e.target : e.target.firstElementChild
@@ -70,16 +71,16 @@ class Memory extends window.HTMLElement {
           let memorydiv = this.shadowRoot.querySelector('.memory')
           let container = this.shadowRoot.querySelector('#memoryContainer')
           p.textContent = 'You Won on ' + this.tries + ' number of tries!'
-          let restartButton = document.createElement('button')
-          restartButton.classList = 'submit'
-          p.appendChild(restartButton)
-          restartButton.textContent = 'Restart'
-          restartButton.addEventListener('click', e => {
-            e.preventDefault()
-            p.textContent = ''
-            container.removeChild(memorydiv)
-            this.memory()
-          })
+          // let restartButton = document.createElement('button')
+          // restartButton.classList = 'submit'
+          // p.appendChild(restartButton)
+          // restartButton.textContent = 'Restart'
+          // restartButton.addEventListener('click', e => {
+          //   e.preventDefault()
+          //   p.textContent = ''
+          //   container.removeChild(memorydiv)
+          //   this.memory()
+          // })
         }
 
         setTimeout(() => {

@@ -8,16 +8,16 @@ const Z_INDEX_OFFSET = 20
 // const OFFSET_LEFT = 40
 // const OFFSET_TOP = 40
 let apps = []
-let game = document.querySelector('#game')
+let window = document.querySelector('#window')
 let buttonMemory = document.querySelector('#button')
 let buttonWeather = document.querySelector('#weather')
 let buttonChat = document.querySelector('#chat')
 
 buttonChat.addEventListener('click', e => {
   e.preventDefault()
-  let game = document.querySelector('#game')
+  let window = document.querySelector('#window')
   let chat = document.createElement('chat-app')
-  game.appendChild(chat)
+  window.appendChild(chat)
   apps.push(chat)
   updateZindex()
   // close()
@@ -25,7 +25,7 @@ buttonChat.addEventListener('click', e => {
 
 buttonMemory.addEventListener('click', e => {
   e.preventDefault()
-  let gameDiv = document.querySelector('#game')
+  let gameDiv = document.querySelector('#window')
   let memo = document.createElement('memory-game')
   memo.setAttribute('class', 'close')
   gameDiv.appendChild(memo)
@@ -37,7 +37,7 @@ buttonMemory.addEventListener('click', e => {
 buttonWeather.addEventListener('click', e => {
   e.preventDefault()
 
-  let weatherdiv = document.querySelector('#game')
+  let weatherdiv = document.querySelector('#window')
   let weatherApp = document.createElement('weather-app')
   weatherApp.setAttribute('class', 'close')
   weatherdiv.appendChild(weatherApp)
@@ -46,7 +46,7 @@ buttonWeather.addEventListener('click', e => {
   // close()
 })
 
-game.addEventListener('click', e => {
+window.addEventListener('click', e => {
   let index = apps.indexOf(e.target)
   let tempApp = apps[index]
   apps.splice(index, 1)

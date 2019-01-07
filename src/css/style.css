@@ -1,11 +1,36 @@
 body {
+  margin: 0;
   background-image: url('../columbine.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-#game {
+#window {
   position: absolute;
   left: 200px;
   top: 100px;
+}
+
+ul {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(rgb(21, 248, 248), rgb(0, 183, 255));
+  border-bottom-right-radius: 26px;
+  border-bottom-left-radius: 26px;
+}
+
+li {
+  display: inline;
+}
+
+img {
+  margin: 0;
+  width: 100px;
+  padding: 10px;
+  transition: transform 1s ease;
+}
+
+img:hover {
+  transform: scale(1.5,1.5);
 }
