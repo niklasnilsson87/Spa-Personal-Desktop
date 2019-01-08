@@ -6,6 +6,8 @@ mainCSS.innerHTML = /* html */`
   height: auto;
   background-color: white;
   position: absolute;
+  left: 100px;
+  top: 200px;
   border: 5px solid;
   border-color: lightblue;
   border-radius: 22px;

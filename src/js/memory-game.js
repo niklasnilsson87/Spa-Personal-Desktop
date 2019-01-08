@@ -68,8 +68,8 @@ class Memory extends window.HTMLElement {
 
         if (this.pair === (this.cols * this.rows) / 2) {
           let p = this.shadowRoot.querySelector('.win')
-          let memorydiv = this.shadowRoot.querySelector('.memory')
-          let container = this.shadowRoot.querySelector('#memoryContainer')
+          // let memorydiv = this.shadowRoot.querySelector('.memory')
+          // let container = this.shadowRoot.querySelector('#memoryContainer')
           p.textContent = 'You Won on ' + this.tries + ' number of tries!'
           // let restartButton = document.createElement('button')
           // restartButton.classList = 'submit'

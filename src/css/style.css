@@ -5,11 +5,11 @@ body {
   background-size: cover;
 }
 
-#window {
+/* #window {
   position: absolute;
   left: 200px;
   top: 100px;
-}
+} */
 
 ul {
   text-align: center;
