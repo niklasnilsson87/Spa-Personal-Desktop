@@ -7,6 +7,39 @@ class Chat extends window.HTMLElement {
     this.socket = null
     this.apiKey = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     this.attachShadow({ mode: 'open' })
+  }
+
+  connectedCallback () {
+    this.beginChat()
+  }
+
+  connectChat () {
+    return new Promise((resolve, reject) => {
+      if (this.socket && this.socket.readyState === 1) {
+        resolve(this.socket)
+        return
+      }
+
+      this.socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
+
+      this.socket.addEventListener('open', e => {
+        resolve(this.socket)
+      })
+
+      this.socket.addEventListener('error', e => {
+        reject(new Error('could not connect to server'))
+      })
+
+      this.socket.addEventListener('message', e => {
+        let message = JSON.parse(e.data)
+        if (message.type === 'message') {
+          this.printMessage(message)
+        }
+      })
+    })
+  }
+
+  beginChat () {
     if (window.localStorage.hasOwnProperty('user')) {
       let id = window.localStorage.getItem(`user`)
       let user = JSON.parse(id)
@@ -28,32 +61,6 @@ class Chat extends window.HTMLElement {
         }
       })
     }
-  }
-
-  connectChat () {
-    return new Promise((resolve, reject) => {
-      if (this.socket && this.socket.readyState === 1) {
-        resolve(this.socket)
-        return
-      }
-
-      this.socket = new WebSocket('ws://vhost3.lnu.se:20080/socket/')
-
-      this.socket.addEventListener('open', e => {
-        resolve(this.socket)
-      })
-
-      this.socket.addEventListener('error', e => {
-        reject(new Error('could not connect to server'))
-      })
-
-      this.socket.addEventListener('message', e => {
-        let message = JSON.parse(e.data)
-        if (message.type === 'message') {
-          this.printMessage(message)
-        }
-      })
-    })
   }
 
   sendMessage (text) {

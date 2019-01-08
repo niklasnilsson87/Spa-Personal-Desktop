@@ -4,8 +4,8 @@ import { mainCSS } from './mainCSS.js'
 class Memory extends window.HTMLElement {
   constructor () {
     super()
-    this.rows = 4
-    this.cols = 4
+    this.rows = 2
+    this.cols = 2
     this.turn1 = ''
     this.turn2 = ''
     this.lastTile = ''

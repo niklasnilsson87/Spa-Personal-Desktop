@@ -1,8 +1,3 @@
-import './dragable.js'
-import './memory-game.js'
-import './weather.js'
-import './chat.js'
-import './templates.js'
 
 const Z_INDEX_OFFSET = 20
 // const OFFSET_LEFT = 40
@@ -20,6 +15,7 @@ buttonChat.addEventListener('click', e => {
   appContainer.appendChild(chat)
   apps.push(chat)
   updateZindex()
+  closeButton()
 })
 
 buttonMemory.addEventListener('click', e => {
@@ -29,6 +25,7 @@ buttonMemory.addEventListener('click', e => {
   gameDiv.appendChild(memo)
   apps.push(memo)
   updateZindex()
+  closeButton()
 })
 
 buttonWeather.addEventListener('click', e => {
@@ -40,9 +37,10 @@ buttonWeather.addEventListener('click', e => {
   weatherdiv.appendChild(weatherApp)
   apps.push(weatherApp)
   updateZindex()
+  closeButton()
 })
 
-appContainer.addEventListener('click', e => {
+appContainer.addEventListener('mousedown', e => {
   let index = apps.indexOf(e.target)
   let tempApp = apps[index]
   apps.splice(index, 1)
@@ -62,25 +60,21 @@ function updateZindex () {
   }
 }
 
-// function updatePosition (newApp) {
-//   console.log('hej')
-//   newApp.style.left = OFFSET_LEFT + 100 + 'px'
-// }
+function closeButton () {
+  let button = apps[apps.length - 1]
+    .shadowRoot.querySelector('drageble-tag')
+    .shadowRoot.querySelector('#border-top a')
+  console.log(button)
 
-// function closeEvent (event) {
-//   apps.pop()
-// }
+  button.addEventListener('click', e => {
+    closeWindow(e)
+    e.stopPropagation()
+  })
+}
 
-// function closeRemoveEvent () {
-
-// }
-
-// function getCloseButton (closeB) {
-//   let closebutton = closeB.shadowRoot
-//     .querySelector('drageble-tag')
-//     .shadowRoot.querySelector('#border-top a')
-
-//   closebutton.addEventListener('click', e => {
-//     closeEvent(e)
-//   })
-// }
+function closeWindow (event) {
+  let closeApp = event.target.parentNode.parentNode.parentNode.parentNode.host.parentNode.host
+  closeApp.parentNode.removeChild(closeApp)
+  apps.pop()
+  console.log(apps)
+}
