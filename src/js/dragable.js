@@ -24,9 +24,6 @@ class Drageble extends window.HTMLElement {
     this.container.addEventListener('mouseup', (e) => {
       this.onMouseUp(e)
     })
-    this.closeButton.addEventListener('click', (e) => {
-      e.preventDefault()
-    })
   }
 
   onMouseDown (e) {
@@ -49,12 +46,6 @@ class Drageble extends window.HTMLElement {
   onMouseUp (e) {
     this.isMouseDown = false
     this.container.style.opacity = 1
-  }
-
-  clean () {
-    while (this.shadowRoot.firstChild) {
-      this.shadowRoot.removeChild(this.shadowRoot.firstChild)
-    }
   }
 }
 

@@ -9,7 +9,7 @@ memoryTemplate.innerHTML = /* html */ `
           <a href="#"><img src="image/memo/0.png" alt="a memory brick" /></a>
         </div>
       </template>
-    <p class="win"></p>
+    <p class="win"></p><br>
   </div>
 </drageble-tag>
 `
@@ -84,8 +84,8 @@ welcomeTemplate.innerHTML = /* html */ `
       <div id="card">
         <h2 id="welcome">Welcome to the chat</h2>
         <h3>Select your user name</h3>
-              <input id="startInput" class="city" type="text" name="NickName"><br>
-            <button id="start_chat_button" class="submit">Submit</button>
+        <input id="startInput" class="city" type="text" name="NickName"><br>
+          <button id="start_chat_button" class="submit">Submit</button>
       </div>
     </div>
   </drageble-tag>

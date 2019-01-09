@@ -19,10 +19,14 @@ class Memory extends window.HTMLElement {
   }
 
   connectedCallback () {
+    console.log(this.createTimerSpan())
     this.memory()
   }
 
   memory () {
+    this.createTimerSpan()
+    this.setTimer()
+    this.startTimer = Date.now()
     this.shuffle()
 
     let container = this.shadowRoot.querySelector('#memoryContainer')
@@ -67,20 +71,7 @@ class Memory extends window.HTMLElement {
         this.pair += 1
 
         if (this.pair === (this.cols * this.rows) / 2) {
-          let p = this.shadowRoot.querySelector('.win')
-          // let memorydiv = this.shadowRoot.querySelector('.memory')
-          // let container = this.shadowRoot.querySelector('#memoryContainer')
-          p.textContent = 'You Won on ' + this.tries + ' number of tries!'
-          // let restartButton = document.createElement('button')
-          // restartButton.classList = 'submit'
-          // p.appendChild(restartButton)
-          // restartButton.textContent = 'Restart'
-          // restartButton.addEventListener('click', e => {
-          //   e.preventDefault()
-          //   p.textContent = ''
-          //   container.removeChild(memorydiv)
-          //   this.memory()
-          // })
+          this.youWin()
         }
 
         setTimeout(() => {
@@ -113,6 +104,61 @@ class Memory extends window.HTMLElement {
       this.tiles[i] = this.tiles[j]
       this.tiles[j] = temp
     }
+  }
+
+  setTimer () {
+    this.time = 0
+    this.loadTimer = setInterval(() => {
+      this.time += 0.1
+      this.shadowRoot.querySelector('.time').textContent = this.time.toFixed(1)
+    }, 100)
+  }
+
+  youWin () {
+    let timerSpan = this.shadowRoot.querySelector('.time')
+    timerSpan.remove()
+    clearInterval(this.loadTimer)
+    this.stopTimer = Date.now()
+    this.totalTime = (this.stopTimer - this.startTimer) / 1000
+    let p = this.shadowRoot.querySelector('.win')
+    let memorydiv = this.shadowRoot.querySelector('.memory')
+    let container = this.shadowRoot.querySelector('#memoryContainer')
+    p.textContent = 'You Won on ' + this.tries + ' number of tries! and time: ' + this.totalTime + ' sec! Well done!'
+    let restartButton = document.createElement('button')
+    restartButton.classList = 'submit'
+    restartButton.style.marginTop = 40 + 'px'
+    p.appendChild(restartButton)
+    restartButton.textContent = 'Restart'
+    memorydiv.style.display = 'none'
+
+    restartButton.addEventListener('click', e => {
+      e.preventDefault()
+      p.textContent = ''
+      this.rows = 4
+      this.cols = 4
+      this.turn1 = null
+      this.turn2 = null
+      this.lastTile = ''
+      this.pair = 0
+      this.tries = 0
+      this.tiles = []
+      container.removeChild(memorydiv)
+      this.memory()
+    })
+  }
+
+  timeResult () {
+    this.stopTimer = Date.now()
+    this.totalTime = (this.stopTimer - this.startTimer) / 1000
+    this.shadowRoot.querySelector('').textContent =
+    `Congratulations ${this.nickname}! You compleated the quiz in ${this.totalTime} seconds`
+  }
+
+  createTimerSpan () {
+    let timer = document.createElement('span')
+    timer.classList = 'time'
+    let container = this.shadowRoot.querySelector('#memoryContainer')
+    container.appendChild(timer)
   }
 }
 

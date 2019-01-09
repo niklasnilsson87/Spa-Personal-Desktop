@@ -19,6 +19,9 @@ class Weather extends window.HTMLElement {
     this.condition2 = this.shadowRoot.querySelector('#condition2')
     this.condition3 = this.shadowRoot.querySelector('#condition3')
     this.noExist = this.shadowRoot.querySelector('.weather_p')
+  }
+
+  connectedCallback () {
     this.getWeather()
     this.getInputValue()
   }
@@ -31,6 +34,7 @@ class Weather extends window.HTMLElement {
       this.createContent()
     } else {
       this.noExist.textContent = 'Try again'
+      setTimeout(() => this.noExist.remove(), 1000)
       this.getInputValue()
     }
   }

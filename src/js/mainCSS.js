@@ -6,8 +6,6 @@ mainCSS.innerHTML = /* html */`
   height: auto;
   background-color: white;
   position: absolute;
-  left: 100px;
-  top: 200px;
   border: 5px solid;
   border-color: lightblue;
   border-radius: 22px;
@@ -52,6 +50,11 @@ h1 {
 .win {
   margin-top: 10px;
   font-size: 20px
+}
+
+.time {
+  margin-left: 125px;
+  font-size: 27px;
 }
 
 p {
