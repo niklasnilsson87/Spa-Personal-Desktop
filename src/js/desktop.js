@@ -25,6 +25,7 @@ buttonMemory.addEventListener('click', e => {
   gameDiv.appendChild(memo)
   apps.push(memo)
   updateZindex()
+  // updatePosition(memo)
   closeButton()
 })
 
@@ -48,6 +49,13 @@ appContainer.addEventListener('mousedown', e => {
   updateZindex()
 })
 
+// function updatePosition (app) {
+//   for (let i = 0; i < apps.length; i += 20) {
+//     getContainer(apps[i]).style.left = OFFSET_LEFT + i + 'px'
+//     getContainer(apps[i]).style.top = OFFSET_TOP + i + 'px'
+//   }
+// }
+
 function getContainer (dragable) {
   return dragable.shadowRoot
     .querySelector('drageble-tag')
@@ -64,7 +72,6 @@ function closeButton () {
   let button = apps[apps.length - 1]
     .shadowRoot.querySelector('drageble-tag')
     .shadowRoot.querySelector('#border-top a')
-  console.log(button)
 
   button.addEventListener('click', e => {
     closeWindow(e)
@@ -76,5 +83,4 @@ function closeWindow (event) {
   let closeApp = event.target.parentNode.parentNode.parentNode.parentNode.host.parentNode.host
   closeApp.parentNode.removeChild(closeApp)
   apps.pop()
-  console.log(apps)
 }

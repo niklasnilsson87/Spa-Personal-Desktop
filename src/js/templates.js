@@ -3,17 +3,15 @@ memoryTemplate.innerHTML = /* html */ `
 <drageble-tag>
   <div id="memoryContainer">
   
-  <h1>Memory!</h1>
-    <template>
-      <div class="memory">
-        <a href="#"><img src="image/memo/0.png" alt="a memory brick" /></a>
-      </div>
-    </template>
+    <h1>Memory!</h1>
+      <template>
+        <div class="memory">
+          <a href="#"><img src="image/memo/0.png" alt="a memory brick" /></a>
+        </div>
+      </template>
     <p class="win"></p>
   </div>
-  
-  
-  </drageble-tag>
+</drageble-tag>
 `
 
 const weatherTemplate = document.createElement('template')
@@ -32,8 +30,7 @@ weatherTemplate.innerHTML = /* html */ `
           <p id="condition2" class="condition"></p><br>
         </div>
         <p id="dispCity"></p>
-        <p id="temp"></p>
-          
+        <p id="temp"></p>  
       </div>
     </div>
   </drageble-tag>
@@ -44,10 +41,10 @@ dragTemplate.innerHTML = /* html */ `
 
   <div id="container">
     <div id="border-top"><a href="#"><img src="./image/Cbutton2.png" class="close_button" alt="closing button" /></a>
-    </div>
-  <slot></slot>
+      </div>
+        <slot></slot>
   
-  </div>
+    </div>
   </div>
 
 `
