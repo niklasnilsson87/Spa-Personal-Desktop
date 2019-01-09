@@ -35,6 +35,7 @@ h1 {
   padding: 30px;
   margin: 0 auto;
   width: 300px;
+  height: 420px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   }

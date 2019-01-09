@@ -1,7 +1,17 @@
 import { chatTemplate, welcomeTemplate } from './templates.js'
 import { mainCSS } from './mainCSS.js'
 
+/**
+ * Class that creates the web component.
+ *
+ * @class Chat
+ * @extends {window.HTMLElement}
+ */
 class Chat extends window.HTMLElement {
+  /**
+   *Creates an instance of Chat.
+   * @memberof Chat
+   */
   constructor () {
     super()
     this.socket = null
@@ -9,10 +19,22 @@ class Chat extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
   }
 
+  /**
+ * Starting point of the application.
+ *
+ * @memberof Chat
+ */
   connectedCallback () {
     this.beginChat()
   }
 
+  /**
+   *
+   *
+   * @returns
+   * @Error {Error}
+   * @memberof Chat
+   */
   connectChat () {
     return new Promise((resolve, reject) => {
       if (this.socket && this.socket.readyState === 1) {
@@ -39,6 +61,12 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  /**
+   * Starting point template where user selects the nickname
+   * or if nickname exist, run the chat
+   *
+   * @memberof Chat
+   */
   beginChat () {
     if (window.localStorage.hasOwnProperty('user')) {
       let id = window.localStorage.getItem(`user`)
@@ -63,6 +91,12 @@ class Chat extends window.HTMLElement {
     }
   }
 
+  /**
+   * Method that handles the text that is written and sends it to the socket
+   *
+   * @param {string} text Text that is sent by the user in chat.
+   * @memberof Chat
+   */
   sendMessage (text) {
     let data = {
       type: 'message',
@@ -79,6 +113,12 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  /**
+   * Method takes the object and prints the data, user and time to the imported template.
+   *
+   * @param {object} message takes the message and prints the data to the chat application.
+   * @memberof Chat
+   */
   printMessage (message) {
     let template = this.chatDiv.querySelectorAll('template')[0]
     this.date = new Date().toLocaleTimeString() + ' ' + new Date().toDateString()
@@ -93,16 +133,24 @@ class Chat extends window.HTMLElement {
     // starts scrollbar at bottom of div.
     let elementHeight = this.printDiv.scrollHeight
     this.printDiv.scrollTop = elementHeight
+
+    // sets the username and text to localstorage.
     this.storage(message.username, message.data)
   }
 
+  /**
+   * Method that imports the chat template and listens for enterkey to send
+   * the text.
+   *
+   * @memberof Chat
+   */
   startChat () {
     this.clean()
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(chatTemplate.content.cloneNode(true))
     this.chatDiv = this.shadowRoot.querySelector('.chatApp')
     this.getStorage()
-    this.connectChat().then(socket => {
+    this.connectChat().then(() => {
       this.sendMessage()
     })
 
@@ -116,6 +164,13 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  /**
+   * Method that saves the username, text and the current time to localstorage.
+   *
+   * @param {string} username the username to store
+   * @param {string} data the text to store
+   * @memberof Chat
+   */
   storage (username, data) {
     const history = {
       username: username,
@@ -132,6 +187,11 @@ class Chat extends window.HTMLElement {
     window.localStorage.setItem('chat', JSON.stringify(chatHistory))
   }
 
+  /**
+   *
+   *
+   * @memberof Chat
+   */
   getStorage () {
     if (window.localStorage.getItem('chat')) {
       let messages = window.localStorage.getItem('chat')

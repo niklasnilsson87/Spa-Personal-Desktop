@@ -1,13 +1,24 @@
+/*
+*
+* Desktop controller module
+*
+* Contains eventlistener to create eatch apps
+*
+*
+*
+*/
 
 const Z_INDEX_OFFSET = 20
 // const OFFSET_LEFT = 40
 // const OFFSET_TOP = 40
+
 let apps = []
 let appContainer = document.querySelector('#appContainer')
 let buttonMemory = document.querySelector('#button')
 let buttonWeather = document.querySelector('#weather')
 let buttonChat = document.querySelector('#chat')
 
+// Creates Chat application.
 buttonChat.addEventListener('click', e => {
   e.preventDefault()
   let appContainer = document.querySelector('#appContainer')
@@ -18,6 +29,7 @@ buttonChat.addEventListener('click', e => {
   closeButton()
 })
 
+// Creates Memory application.
 buttonMemory.addEventListener('click', e => {
   e.preventDefault()
   let gameDiv = document.querySelector('#appContainer')
@@ -29,6 +41,7 @@ buttonMemory.addEventListener('click', e => {
   closeButton()
 })
 
+// Creates Weather application.
 buttonWeather.addEventListener('click', e => {
   e.preventDefault()
 
@@ -41,6 +54,7 @@ buttonWeather.addEventListener('click', e => {
   closeButton()
 })
 
+// Controlls focus on divs that is clicked.
 appContainer.addEventListener('mousedown', e => {
   let index = apps.indexOf(e.target)
   let tempApp = apps[index]
@@ -56,18 +70,32 @@ appContainer.addEventListener('mousedown', e => {
 //   }
 // }
 
+/**
+ * Function that gets the containerID from the custom elements in apps array
+ *
+ * @param {object} dragable Costum element
+ * @returns returns the path to containerID
+ */
 function getContainer (dragable) {
   return dragable.shadowRoot
     .querySelector('drageble-tag')
     .shadowRoot.querySelector('#container')
 }
 
+/**
+ * Function to get focused on the "window" that was clicked.
+ *
+ */
 function updateZindex () {
   for (let i = 0; i < apps.length; i++) {
     getContainer(apps[i]).style.zIndex = Z_INDEX_OFFSET + i
   }
 }
 
+/**
+ * Function to close "window" divs.
+ *
+ */
 function closeButton () {
   let button = apps[apps.length - 1]
     .shadowRoot.querySelector('drageble-tag')
@@ -75,10 +103,14 @@ function closeButton () {
 
   button.addEventListener('click', e => {
     closeWindow(e)
-    e.stopPropagation()
   })
 }
 
+/**
+ * Function to remove divs from the DOM and the apps array.
+ *
+ * @param {Object} event
+ */
 function closeWindow (event) {
   let closeApp = event.target.parentNode.parentNode.parentNode.parentNode.host.parentNode.host
   closeApp.parentNode.removeChild(closeApp)

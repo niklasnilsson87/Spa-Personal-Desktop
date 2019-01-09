@@ -19,7 +19,6 @@ class Memory extends window.HTMLElement {
   }
 
   connectedCallback () {
-    console.log(this.createTimerSpan())
     this.memory()
   }
 
@@ -115,11 +114,7 @@ class Memory extends window.HTMLElement {
   }
 
   youWin () {
-    let timerSpan = this.shadowRoot.querySelector('.time')
-    timerSpan.remove()
-    clearInterval(this.loadTimer)
-    this.stopTimer = Date.now()
-    this.totalTime = (this.stopTimer - this.startTimer) / 1000
+    this.timeResult()
     let p = this.shadowRoot.querySelector('.win')
     let memorydiv = this.shadowRoot.querySelector('.memory')
     let container = this.shadowRoot.querySelector('#memoryContainer')
@@ -129,7 +124,6 @@ class Memory extends window.HTMLElement {
     restartButton.style.marginTop = 40 + 'px'
     p.appendChild(restartButton)
     restartButton.textContent = 'Restart'
-    memorydiv.style.display = 'none'
 
     restartButton.addEventListener('click', e => {
       e.preventDefault()
@@ -148,10 +142,11 @@ class Memory extends window.HTMLElement {
   }
 
   timeResult () {
+    let timerSpan = this.shadowRoot.querySelector('.time')
+    timerSpan.remove()
+    clearInterval(this.loadTimer)
     this.stopTimer = Date.now()
     this.totalTime = (this.stopTimer - this.startTimer) / 1000
-    this.shadowRoot.querySelector('').textContent =
-    `Congratulations ${this.nickname}! You compleated the quiz in ${this.totalTime} seconds`
   }
 
   createTimerSpan () {
