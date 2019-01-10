@@ -24,13 +24,14 @@ weatherTemplate.innerHTML = /* html */ `
       <input class="city" value="Kalmar" />
       <button class="submit">Submit</button>
       <div id="disp">
+      <p id="dispCity"></p>
         <div id="cont1">
-          <p id="condition1" class="condition"></p><br>
-          <p id="condition3" class="condition"></p><br>
-          <p id="condition2" class="condition"></p><br>
+          <p id="condition1" class="condition"></p>
+          <p id="condition3" class="condition"></p>
+          <p id="condition2" class="condition"></p>
+          <p id="temp"></p>
+
         </div>
-        <p id="dispCity"></p>
-        <p id="temp"></p>  
       </div>
     </div>
   </drageble-tag>
@@ -49,10 +50,15 @@ dragTemplate.innerHTML = /* html */ `
 
 `
 
+const containerTemplate = document.createElement('template')
+containerTemplate.innerHTML = /* html */ `
+<drageble-tag>
+  <div id="chat-container"></div>
+</drageble-tag>
+`
+
 const chatTemplate = document.createElement('template')
 chatTemplate.innerHTML = /* html */ `
-
-  <drageble-tag>
     <div class="chatApp">
       <h1>chat</h1>
 
@@ -71,13 +77,10 @@ chatTemplate.innerHTML = /* html */ `
             </div>
          
         </div>
-  </drageble-tag>
 `
 
 const welcomeTemplate = document.createElement('template')
 welcomeTemplate.innerHTML = /* html */ `
-
-  <drageble-tag>
     <div class="chatApp">
       <h1>chat</h1>
 
@@ -88,9 +91,9 @@ welcomeTemplate.innerHTML = /* html */ `
           <button id="start_chat_button" class="submit">Submit</button>
       </div>
     </div>
-  </drageble-tag>
   `
 export {
+  containerTemplate,
   welcomeTemplate,
   chatTemplate,
   memoryTemplate,

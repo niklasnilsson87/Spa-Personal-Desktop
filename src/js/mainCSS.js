@@ -59,7 +59,6 @@ h1 {
 }
 
 p {
-  float: right;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -109,46 +108,37 @@ p {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   padding: 10px;
-  width: 480px;
   background-image: linear-gradient(to bottom right, lightblue, rgb(0, 183, 255));
 }
 
 #disp {
   padding: 20px;
   font-size: 40px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   margin: 20px 25px 0px;
   border-radius: 16px;
-  width: 80%;
   background-image: linear-gradient(to bottom right, white, lightblue);
 }
 
 #dispCity {
-  float: left;
   font-size: 40px;
-}
-
-#temp {
-  margin-top: 5px;
-  float: left;
+  flex: 1;
 }
 
 #cont1 {
-  height: 180px;
-  float: right;
-  width: 170px;
- 
+  padding: 20px 0px 0px 30px;
 }
 
 .condition {
-  display: inline-block;
   font-family: cursive;
   font-size: 16px;
+  text-align: right;
 }
 
 .weather_img {
-  margin-top: 20px;
   width: 70px;
+  vertical-align: middle;
 }
 
 .city {

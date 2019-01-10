@@ -77,6 +77,7 @@ appContainer.addEventListener('mousedown', e => {
  * @returns returns the path to containerID
  */
 function getContainer (dragable) {
+  console.log(dragable)
   return dragable.shadowRoot
     .querySelector('drageble-tag')
     .shadowRoot.querySelector('#container')
@@ -113,6 +114,7 @@ function closeButton () {
  */
 function closeWindow (event) {
   let closeApp = event.target.parentNode.parentNode.parentNode.parentNode.host.parentNode.host
+  console.log(closeApp)
   closeApp.parentNode.removeChild(closeApp)
   apps.pop()
 }

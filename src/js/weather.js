@@ -18,7 +18,11 @@ class Weather extends window.HTMLElement {
     this.condition1 = this.shadowRoot.querySelector('#condition1')
     this.condition2 = this.shadowRoot.querySelector('#condition2')
     this.condition3 = this.shadowRoot.querySelector('#condition3')
-    this.noExist = this.shadowRoot.querySelector('.weather_p')
+    this.noExist = this.$('.weather_p')
+  }
+
+  $ (query) {
+    return this.shadowRoot.querySelector(query)
   }
 
   connectedCallback () {
@@ -34,8 +38,10 @@ class Weather extends window.HTMLElement {
       this.createContent()
     } else {
       this.noExist.textContent = 'Try again'
-      setTimeout(() => this.noExist.remove(), 1000)
-      this.getInputValue()
+      setTimeout(() => {
+        this.noExist.textContent = ''
+      }, 1000)
+      // this.getInputValue()
     }
   }
 

@@ -1,4 +1,4 @@
-import { chatTemplate, welcomeTemplate } from './templates.js'
+import { chatTemplate, welcomeTemplate, containerTemplate } from './templates.js'
 import { mainCSS } from './mainCSS.js'
 
 /**
@@ -17,6 +17,8 @@ class Chat extends window.HTMLElement {
     this.socket = null
     this.apiKey = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     this.attachShadow({ mode: 'open' })
+    this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
+    this.shadowRoot.appendChild(containerTemplate.content.cloneNode(true))
   }
 
   /**
@@ -26,6 +28,13 @@ class Chat extends window.HTMLElement {
  */
   connectedCallback () {
     this.beginChat()
+  }
+
+  disconnectedCallback () {
+    console.log('socket', this.socket)
+    console.log('onOpenSocket', this.onOpenSocket)
+    this.socket.removeEventListener('open', this.onOpenSocket)
+    this.socket.removeEventListener('message', this.onMessage)
   }
 
   /**
@@ -44,20 +53,25 @@ class Chat extends window.HTMLElement {
 
       this.socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
 
-      this.socket.addEventListener('open', e => {
-        resolve(this.socket)
-      })
+      this.onOpenSocket = e => resolve(this.socket)
+
+      this.socket.addEventListener('open', this.onOpenSocket)
 
       this.socket.addEventListener('error', e => {
         reject(new Error('could not connect to server'))
       })
 
-      this.socket.addEventListener('message', e => {
+      this.onMessage = e => {
         let message = JSON.parse(e.data)
         if (message.type === 'message') {
+          // sets the username and text to localstorage.
+          console.log('new message')
+          // this.storage(message.username, message.data)
           this.printMessage(message)
         }
-      })
+      }
+
+      this.socket.addEventListener('message', this.onMessage)
     })
   }
 
@@ -69,13 +83,13 @@ class Chat extends window.HTMLElement {
    */
   beginChat () {
     if (window.localStorage.hasOwnProperty('user')) {
-      let id = window.localStorage.getItem(`user`)
+      let id = window.localStorage.getItem('user')
       let user = JSON.parse(id)
       this.nickname = user.username
       this.startChat()
     } else {
-      this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
-      this.shadowRoot.appendChild(welcomeTemplate.content.cloneNode(true))
+      // this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
+      this.shadowRoot.querySelector('#chat-container').appendChild(welcomeTemplate.content.cloneNode(true))
       this.inputButton = this.shadowRoot.querySelector('#start_chat_button')
       this.input = this.shadowRoot.querySelector('#startInput')
 
@@ -113,6 +127,10 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  formatDate (date) {
+    return date.toLocaleTimeString() + ' ' + date.toDateString()
+  }
+
   /**
    * Method takes the object and prints the data, user and time to the imported template.
    *
@@ -121,11 +139,11 @@ class Chat extends window.HTMLElement {
    */
   printMessage (message) {
     let template = this.chatDiv.querySelectorAll('template')[0]
-    this.date = new Date().toLocaleTimeString() + ' ' + new Date().toDateString()
+    let date = message.date ? this.formatDate(new Date(message.date)) : this.formatDate(new Date())
 
     let messageDiv = document.importNode(template.content.firstElementChild, true)
     messageDiv.querySelectorAll('.text')[0].textContent = message.data
-    messageDiv.querySelectorAll('.autor')[0].textContent = `${message.username} ${this.date}`
+    messageDiv.querySelectorAll('.autor')[0].textContent = `${message.username} ${date}`
 
     this.printDiv = this.shadowRoot.querySelectorAll('.messages')[0]
     this.printDiv.appendChild(messageDiv)
@@ -146,8 +164,7 @@ class Chat extends window.HTMLElement {
    */
   startChat () {
     this.clean()
-    this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
-    this.shadowRoot.appendChild(chatTemplate.content.cloneNode(true))
+    this.shadowRoot.querySelector('#chat-container').appendChild(chatTemplate.content.cloneNode(true))
     this.chatDiv = this.shadowRoot.querySelector('.chatApp')
     this.getStorage()
     this.connectChat().then(() => {
@@ -172,19 +189,29 @@ class Chat extends window.HTMLElement {
    * @memberof Chat
    */
   storage (username, data) {
-    const history = {
+    const newPost = {
       username: username,
       data: data,
-      date: new Date().toLocaleTimeString()
+      date: new Date().getTime()
     }
 
     const saveddata = window.localStorage.getItem('chat') || '[]'
 
-    const chatHistory = [...JSON.parse(saveddata), history]
-      .sort((a, b) => b.date.localeCompare(a.date))
+    const history = JSON.parse(saveddata)
+
+    if (history.some(post => this.isSamePost(post, newPost))) return
+
+    const chatHistory = [...history, newPost]
+      .sort((a, b) => Number(b.date) - Number(a.date))
       .slice(0, 10)
 
     window.localStorage.setItem('chat', JSON.stringify(chatHistory))
+  }
+
+  isSamePost (post, newPost) {
+    return post.username === newPost.username &&
+    post.data === newPost.data &&
+    post.date.toString().substring(0, 11) === newPost.date.toString().substring(0, 11)
   }
 
   /**
@@ -197,9 +224,9 @@ class Chat extends window.HTMLElement {
       let messages = window.localStorage.getItem('chat')
       this.messages = JSON.parse(messages)
 
-      for (let i = this.messages.length - 1; i >= 0; i--) {
-        this.printMessage(this.messages[i])
-      }
+      this.messages
+        .sort((a, b) => Number(a.date) - Number(b.date))
+        .map(message => this.printMessage(message))
     }
   }
 
@@ -212,8 +239,9 @@ class Chat extends window.HTMLElement {
   }
 
   clean () {
-    while (this.shadowRoot.firstChild) {
-      this.shadowRoot.removeChild(this.shadowRoot.firstChild)
+    const container = this.shadowRoot.querySelector('#chat-container')
+    while (container.firstChild) {
+      container.removeChild(container.firstChild)
     }
   }
 }
