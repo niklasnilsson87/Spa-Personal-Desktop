@@ -2,7 +2,7 @@ import { chatTemplate, welcomeTemplate, containerTemplate } from './templates.js
 import { mainCSS } from './mainCSS.js'
 
 /**
- * Class that creates the web component.
+ * Class that creates the chat web component.
  *
  * @class Chat
  * @extends {window.HTMLElement}

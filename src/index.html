@@ -9,11 +9,22 @@
   <title>Personal Web Desktop</title>
 </head>
 <body>
-  <ul>
+  <ul id="apps">
     <li><a href="#"><img src="image/WeatherIcon.png" id="weather" alt="Weather Icon" /></a></li>
     <li><a href="#"><img src="image/MemoryIcon.png" id="button" alt="Memory Icon" /></a></li>
     <li><a href="#"><img src="image/ChatIcon.png" id="chat" alt="Chat Icon" /></a></li>
+    <li class="digital">
+      <div class="clock">
+        <span id="hour"></span>
+        <span id="minutes"></span>
+        <span id="seconds"></span>
+      <ul id="date">
+      <li class="dates"></li>
+      </ul>
+    </div>
+  </li>
   </ul>
+  
   <div id="appContainer"></div>
   <script nomodule src="build.js"></script>
 </body>

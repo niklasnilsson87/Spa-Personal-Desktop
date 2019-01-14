@@ -1,20 +1,39 @@
 import { memoryTemplate } from './templates.js'
 import { mainCSS } from './mainCSS.js'
-
+/**
+ * Class that creates the Memory web component.
+ *
+ * @class Memory
+ * @extends {window.HTMLElement}
+ */
 class Memory extends window.HTMLElement {
+  /**
+   *Creates an instance of Memory.
+   * @memberof Memory
+   */
   constructor () {
     super()
     this.conditions()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(memoryTemplate.content.cloneNode(true))
-    this.container = this.shadowRoot.querySelector('#container')
   }
 
+  /**
+  * Callback that listens when page is loaded.
+  *
+  * @memberof Memory
+  */
   connectedCallback () {
     this.memory()
   }
 
+  /**
+   * Starting point of the application.
+   * Creates timer and shuffles the cards and prints the memory template.
+   *
+   * @memberof Memory
+   */
   memory () {
     this.createTimerSpan()
     this.setTimer()
@@ -43,7 +62,19 @@ class Memory extends window.HTMLElement {
     container.appendChild(div)
   }
 
+  /**
+   * Method that
+   *
+   * @param {Number} tile
+   * @param {Number} index
+   * @param {Object} img
+   * @memberof Memory
+   */
   turnBrick (tile, index, img) {
+    console.log(typeof tile)
+    console.log(typeof index)
+    console.log(typeof img)
+
     if (this.turn2) { return }
 
     img.src = 'image/memo/' + tile + '.png'

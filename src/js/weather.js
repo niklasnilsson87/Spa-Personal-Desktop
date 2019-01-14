@@ -1,7 +1,17 @@
 import { weatherTemplate } from './templates.js'
 import { mainCSS } from './mainCSS.js'
 
+/**
+ * Class that creates the Weather web component.
+ *
+ * @class Weather
+ * @extends {window.HTMLElement}
+ */
 class Weather extends window.HTMLElement {
+  /**
+   *Creates an instance of Weather.
+   * @memberof Weather
+   */
   constructor () {
     super()
     this.apiKey = '&APPID=ba59d28f9f13f728e9b8884984882a98'
@@ -21,15 +31,32 @@ class Weather extends window.HTMLElement {
     this.noExist = this.query('.weather_p')
   }
 
+  /**
+   *  Method that querys from the shadowRoot.
+   *
+   * @param {String} query
+   * @returns path to shadowRoot.
+   * @memberof Weather
+   */
   query (query) {
     return this.shadowRoot.querySelector(query)
   }
 
+  /**
+   * Starting point of the application.
+   *
+   * @memberof Weather
+   */
   connectedCallback () {
     this.getWeather()
     this.getInputValue()
   }
 
+  /**
+   * Method to get weather from openweathermap.com.
+   *
+   * @memberof Weather
+   */
   async getWeather () {
     this.weather = await window.fetch(this.api + this.city.value + this.units + this.apiKey + this.language)
     this.weather = await this.weather.json()
@@ -44,6 +71,11 @@ class Weather extends window.HTMLElement {
     }
   }
 
+  /**
+   * Method that listens for new inputs for weather search.
+   *
+   * @memberof Weather
+   */
   getInputValue () {
     let submit = this.shadowRoot.querySelector('.submit')
 
@@ -54,6 +86,11 @@ class Weather extends window.HTMLElement {
     })
   }
 
+  /**
+   * Method that creates content for the application.
+   *
+   * @memberof Weather
+   */
   createContent () {
     if (this.img) {
       this.img.src = ''
@@ -70,4 +107,6 @@ class Weather extends window.HTMLElement {
     this.condition3.textContent = `Vind: ${this.weather.wind.speed} m/s`
   }
 }
+
+// creates element.
 window.customElements.define('weather-app', Weather)

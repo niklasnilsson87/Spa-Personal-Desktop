@@ -9,7 +9,6 @@ class Drageble extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(dragTemplate.content.cloneNode(true))
-    this.closeButton = this.shadowRoot.querySelector('#border-top a')
     this.container = this.shadowRoot.querySelector('#container')
     this.windowDrag()
   }

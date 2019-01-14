@@ -9,9 +9,6 @@
 */
 
 const Z_INDEX_OFFSET = 20
-// const OFFSET_LEFT = 40
-// const OFFSET_TOP = 40
-
 let apps = []
 let appContainer = document.querySelector('#appContainer')
 let buttonMemory = document.querySelector('#button')
@@ -38,7 +35,6 @@ buttonMemory.addEventListener('click', e => {
   gameDiv.appendChild(memo)
   apps.push(memo)
   updateZindex()
-  // updatePosition(memo)
   closeButton()
 })
 
@@ -63,13 +59,6 @@ appContainer.addEventListener('mousedown', e => {
   apps.push(tempApp)
   updateZindex()
 })
-
-// function updatePosition (app) {
-//   for (let i = 0; i < apps.length; i += 20) {
-//     getContainer(apps[i]).style.left = OFFSET_LEFT + i + 'px'
-//     getContainer(apps[i]).style.top = OFFSET_TOP + i + 'px'
-//   }
-// }
 
 /**
  * Function that gets the containerID from the custom elements in apps array
@@ -110,7 +99,7 @@ function closeButton () {
 /**
  * Function to remove divs from the DOM and the apps array.
  *
- * @param {Object} event
+ * @param {Object} event event that is clicked on
  */
 function closeWindow (event) {
   let closeApp = event.target.parentNode.parentNode.parentNode.parentNode.host.parentNode.host
@@ -118,6 +107,53 @@ function closeWindow (event) {
   apps.pop()
 }
 
+/**
+ * Gets the query to app icons
+ *
+ * @param {Object} app the app that was clicked on
+ * @returns the path to app-icon
+ */
 function getIcon (app) {
   return app.shadowRoot.querySelector('drageble-tag').shadowRoot.querySelector('#app-icon')
 }
+
+/**
+ *Sets the current time and prits it to screen
+ *
+ */
+function clock () {
+  const fullDate = new Date()
+  let hours = fullDate.getHours()
+  let minutes = fullDate.getMinutes()
+  let seconds = fullDate.getSeconds()
+
+  if (hours < 10) {
+    hours = '0' + hours
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes
+  }
+  if (seconds < 10) {
+    seconds = '0' + seconds
+  }
+
+  document.querySelector('#hour').textContent = hours
+  document.querySelector('#minutes').textContent = ':' + minutes
+  document.querySelector('#seconds').textContent = ':' + seconds
+}
+
+/**
+ * Sets the current date and prints it to screen.
+ *
+ */
+function date () {
+  let datecontainer = document.querySelector('.dates')
+  let date = new Date().toDateString()
+  datecontainer.textContent = date
+}
+
+clock()
+date()
+// updates the clock and dates.
+setInterval(clock, 1000)
+setInterval(date, 60000)
