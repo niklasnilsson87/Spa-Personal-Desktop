@@ -4,14 +4,7 @@ import { mainCSS } from './mainCSS.js'
 class Memory extends window.HTMLElement {
   constructor () {
     super()
-    this.rows = 4
-    this.cols = 4
-    this.turn1 = ''
-    this.turn2 = ''
-    this.lastTile = ''
-    this.pair = 0
-    this.tries = 0
-    this.tiles = []
+    this.conditions()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(memoryTemplate.content.cloneNode(true))
@@ -128,14 +121,7 @@ class Memory extends window.HTMLElement {
     restartButton.addEventListener('click', e => {
       e.preventDefault()
       p.textContent = ''
-      this.rows = 4
-      this.cols = 4
-      this.turn1 = null
-      this.turn2 = null
-      this.lastTile = ''
-      this.pair = 0
-      this.tries = 0
-      this.tiles = []
+      this.conditions()
       container.removeChild(memorydiv)
       this.memory()
     })
@@ -154,6 +140,17 @@ class Memory extends window.HTMLElement {
     timer.classList = 'time'
     let container = this.shadowRoot.querySelector('#memoryContainer')
     container.appendChild(timer)
+  }
+
+  conditions () {
+    this.rows = 4
+    this.cols = 4
+    this.turn1 = null
+    this.turn2 = null
+    this.lastTile = ''
+    this.pair = 0
+    this.tries = 0
+    this.tiles = []
   }
 }
 

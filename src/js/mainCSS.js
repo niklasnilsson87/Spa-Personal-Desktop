@@ -97,6 +97,11 @@ p {
   font-family: helvetica;
 }
 
+#border-top #app-icon {
+  float: left;
+  margin-left: 10px;
+}
+
 #border-top img {
   float: right;
   width: 15px;

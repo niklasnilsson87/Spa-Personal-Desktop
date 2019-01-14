@@ -11,17 +11,17 @@ class Weather extends window.HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
     this.shadowRoot.appendChild(weatherTemplate.content.cloneNode(true))
-    this.container = this.shadowRoot.querySelector('#container')
-    this.city = this.shadowRoot.querySelector('.city')
-    this.tempID = this.shadowRoot.querySelector('#temp')
-    this.dispCity = this.shadowRoot.querySelector('#dispCity')
-    this.condition1 = this.shadowRoot.querySelector('#condition1')
-    this.condition2 = this.shadowRoot.querySelector('#condition2')
-    this.condition3 = this.shadowRoot.querySelector('#condition3')
-    this.noExist = this.$('.weather_p')
+    this.container = this.query('#container')
+    this.city = this.query('.city')
+    this.tempID = this.query('#temp')
+    this.dispCity = this.query('#dispCity')
+    this.condition1 = this.query('#condition1')
+    this.condition2 = this.query('#condition2')
+    this.condition3 = this.query('#condition3')
+    this.noExist = this.query('.weather_p')
   }
 
-  $ (query) {
+  query (query) {
     return this.shadowRoot.querySelector(query)
   }
 
@@ -41,7 +41,6 @@ class Weather extends window.HTMLElement {
       setTimeout(() => {
         this.noExist.textContent = ''
       }, 1000)
-      // this.getInputValue()
     }
   }
 

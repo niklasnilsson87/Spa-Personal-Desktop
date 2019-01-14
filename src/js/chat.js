@@ -31,8 +31,6 @@ class Chat extends window.HTMLElement {
   }
 
   disconnectedCallback () {
-    console.log('socket', this.socket)
-    console.log('onOpenSocket', this.onOpenSocket)
     this.socket.removeEventListener('open', this.onOpenSocket)
     this.socket.removeEventListener('message', this.onMessage)
   }
@@ -64,9 +62,7 @@ class Chat extends window.HTMLElement {
       this.onMessage = e => {
         let message = JSON.parse(e.data)
         if (message.type === 'message') {
-          // sets the username and text to localstorage.
-          console.log('new message')
-          // this.storage(message.username, message.data)
+          this.storage(message.username, message.data)
           this.printMessage(message)
         }
       }
@@ -88,12 +84,10 @@ class Chat extends window.HTMLElement {
       this.nickname = user.username
       this.startChat()
     } else {
-      // this.shadowRoot.appendChild(mainCSS.content.cloneNode(true))
       this.shadowRoot.querySelector('#chat-container').appendChild(welcomeTemplate.content.cloneNode(true))
-      this.inputButton = this.shadowRoot.querySelector('#start_chat_button')
-      this.input = this.shadowRoot.querySelector('#startInput')
+      let inputButton = this.shadowRoot.querySelector('#start_chat_button')
 
-      this.inputButton.addEventListener('click', e => {
+      inputButton.addEventListener('click', e => {
         e.preventDefault()
         this.nickname = this.shadowRoot.querySelector('#startInput').value
 
@@ -145,15 +139,12 @@ class Chat extends window.HTMLElement {
     messageDiv.querySelectorAll('.text')[0].textContent = message.data
     messageDiv.querySelectorAll('.autor')[0].textContent = `${message.username} ${date}`
 
-    this.printDiv = this.shadowRoot.querySelectorAll('.messages')[0]
-    this.printDiv.appendChild(messageDiv)
+    let printDiv = this.shadowRoot.querySelectorAll('.messages')[0]
+    printDiv.appendChild(messageDiv)
 
     // starts scrollbar at bottom of div.
-    let elementHeight = this.printDiv.scrollHeight
-    this.printDiv.scrollTop = elementHeight
-
-    // sets the username and text to localstorage.
-    this.storage(message.username, message.data)
+    let elementHeight = printDiv.scrollHeight
+    printDiv.scrollTop = elementHeight
   }
 
   /**

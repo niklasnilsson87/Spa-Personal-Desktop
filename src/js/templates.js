@@ -41,7 +41,9 @@ const dragTemplate = document.createElement('template')
 dragTemplate.innerHTML = /* html */ `
 
   <div id="container">
-    <div id="border-top"><a href="#"><img src="./image/Cbutton2.png" class="close_button" alt="closing button" /></a>
+    <div id="border-top">
+      <a href="#"><img src="./image/Cbutton2.png" class="close_button" alt="closing button" /></a>
+      <img id="app-icon" src="./image/MemoryIcon.png" alt="App Icon" />
       </div>
         <slot></slot>
   

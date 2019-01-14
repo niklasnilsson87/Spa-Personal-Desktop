@@ -25,6 +25,7 @@ buttonChat.addEventListener('click', e => {
   let chat = document.createElement('chat-app')
   appContainer.appendChild(chat)
   apps.push(chat)
+  getIcon(chat).src = './image/ChatIcon.png'
   updateZindex()
   closeButton()
 })
@@ -47,9 +48,9 @@ buttonWeather.addEventListener('click', e => {
 
   let weatherdiv = document.querySelector('#appContainer')
   let weatherApp = document.createElement('weather-app')
-
   weatherdiv.appendChild(weatherApp)
   apps.push(weatherApp)
+  getIcon(weatherApp).src = './image/WeatherIcon.png'
   updateZindex()
   closeButton()
 })
@@ -77,7 +78,6 @@ appContainer.addEventListener('mousedown', e => {
  * @returns returns the path to containerID
  */
 function getContainer (dragable) {
-  console.log(dragable)
   return dragable.shadowRoot
     .querySelector('drageble-tag')
     .shadowRoot.querySelector('#container')
@@ -114,7 +114,10 @@ function closeButton () {
  */
 function closeWindow (event) {
   let closeApp = event.target.parentNode.parentNode.parentNode.parentNode.host.parentNode.host
-  console.log(closeApp)
   closeApp.parentNode.removeChild(closeApp)
   apps.pop()
+}
+
+function getIcon (app) {
+  return app.shadowRoot.querySelector('drageble-tag').shadowRoot.querySelector('#app-icon')
 }
