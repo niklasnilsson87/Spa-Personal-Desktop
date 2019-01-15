@@ -1,3 +1,10 @@
+/*
+*
+* Module that holds all the templates and exports them.
+*
+*
+*/
+
 const memoryTemplate = document.createElement('template')
 memoryTemplate.innerHTML = /* html */ `
 <drageble-tag>

@@ -20,7 +20,7 @@ class Memory extends window.HTMLElement {
   }
 
   /**
-  * Callback that listens when page is loaded.
+  * Callback that listens when page is loaded in the DOM.
   *
   * @memberof Memory
   */
@@ -63,17 +63,18 @@ class Memory extends window.HTMLElement {
   }
 
   /**
-   * Method that
+   * Method that is the enginge of the game.
+   * Decides which brick to turn and show and compare if you find a match.
    *
-   * @param {Number} tile
-   * @param {Number} index
-   * @param {Object} img
+   * @param {Number} tile Number that is random.
+   * @param {Number} index Number on which index the klicked image is.
+   * @param {Object} img Use to control the img source.
    * @memberof Memory
    */
   turnBrick (tile, index, img) {
-    console.log(typeof tile)
-    console.log(typeof index)
-    console.log(typeof img)
+    // console.log(tile)
+    // console.log(index)
+    console.log(img)
 
     if (this.turn2) { return }
 
@@ -116,6 +117,11 @@ class Memory extends window.HTMLElement {
     }
   }
 
+  /**
+   * Shuffle method that pushes 2 tiles into the array and shuffles it.
+   *
+   * @memberof Memory
+   */
   shuffle () {
     for (let i = 1; i <= (this.rows * this.cols) / 2; i++) {
       this.tiles.push(i)
@@ -129,6 +135,11 @@ class Memory extends window.HTMLElement {
     }
   }
 
+  /**
+   * Method that counts how many seconds you play the game.
+   *
+   * @memberof Memory
+   */
   setTimer () {
     this.time = 0
     this.loadTimer = setInterval(() => {
@@ -137,6 +148,12 @@ class Memory extends window.HTMLElement {
     }, 100)
   }
 
+  /**
+   * Method that shows when you complete the game.
+   * Shows you won message and adds the restar button.
+   *
+   * @memberof Memory
+   */
   youWin () {
     this.timeResult()
     let p = this.shadowRoot.querySelector('.win')
@@ -158,6 +175,11 @@ class Memory extends window.HTMLElement {
     })
   }
 
+  /**
+   * Clears the span and timers.
+   *
+   * @memberof Memory
+   */
   timeResult () {
     let timerSpan = this.shadowRoot.querySelector('.time')
     timerSpan.remove()
@@ -166,6 +188,11 @@ class Memory extends window.HTMLElement {
     this.totalTime = (this.stopTimer - this.startTimer) / 1000
   }
 
+  /**
+   * Creates a span to put the timer in.
+   *
+   * @memberof Memory
+   */
   createTimerSpan () {
     let timer = document.createElement('span')
     timer.classList = 'time'
@@ -173,6 +200,11 @@ class Memory extends window.HTMLElement {
     container.appendChild(timer)
   }
 
+  /**
+   *  Conditions to start the game.
+   *
+   * @memberof Memory
+   */
   conditions () {
     this.rows = 4
     this.cols = 4
@@ -185,4 +217,5 @@ class Memory extends window.HTMLElement {
   }
 }
 
+// creates element.
 window.customElements.define('memory-game', Memory)

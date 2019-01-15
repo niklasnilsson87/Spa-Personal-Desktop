@@ -22,7 +22,7 @@ class Chat extends window.HTMLElement {
   }
 
   /**
- * Starting point of the application.
+ * Listening when the application is running in DOM.
  *
  * @memberof Chat
  */
@@ -30,20 +30,28 @@ class Chat extends window.HTMLElement {
     this.beginChat()
   }
 
+  /**
+   * listening when the application get removed from the DOM.
+   *
+   * @memberof Chat
+   */
   disconnectedCallback () {
     this.socket.removeEventListener('open', this.onOpenSocket)
     this.socket.removeEventListener('message', this.onMessage)
   }
 
   /**
+   *  Method that creates a new promise with two function callbacks.
+   *  Listen if the socket is open and runs resolve.
+   *  Listen if we get an error and rejects it.
+   *  Sends the message to the socket.
    *
-   *
-   * @returns
-   * @Error {Error}
+   * @returns promise
    * @memberof Chat
    */
   connectChat () {
     return new Promise((resolve, reject) => {
+      // checks if connection is open
       if (this.socket && this.socket.readyState === 1) {
         resolve(this.socket)
         return
@@ -51,11 +59,11 @@ class Chat extends window.HTMLElement {
 
       this.socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
 
-      this.onOpenSocket = e => resolve(this.socket)
+      this.onOpenSocket = () => resolve(this.socket)
 
       this.socket.addEventListener('open', this.onOpenSocket)
 
-      this.socket.addEventListener('error', e => {
+      this.socket.addEventListener('error', () => {
         reject(new Error('could not connect to server'))
       })
 
@@ -96,6 +104,18 @@ class Chat extends window.HTMLElement {
           this.startChat()
         }
       })
+
+      this.shadowRoot.querySelector('#startInput').addEventListener('keypress', e => {
+        if (e.keyCode === 13) {
+          e.preventDefault()
+          this.nickname = this.shadowRoot.querySelector('#startInput').value
+
+          if (this.nickname) {
+            this.storageUser()
+            this.startChat()
+          }
+        }
+      })
     }
   }
 
@@ -121,6 +141,13 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  /**
+   *  Method that gives me the time and date.
+   *
+   * @param {Object} date the full date.
+   * @returns {string} Returns the time and date.
+   * @memberof Chat
+   */
   formatDate (date) {
     return date.toLocaleTimeString() + ' ' + date.toDateString()
   }
@@ -163,7 +190,6 @@ class Chat extends window.HTMLElement {
     })
 
     this.chatDiv.addEventListener('keypress', (e) => {
-      // listen for Enter Key
       if (e.keyCode === 13) {
         this.sendMessage(e.target.value)
         e.target.value = ''
@@ -199,6 +225,14 @@ class Chat extends window.HTMLElement {
     window.localStorage.setItem('chat', JSON.stringify(chatHistory))
   }
 
+  /**
+   *  Method that checks if localstorage should save message.
+   *
+   * @param {Object} post Post on localstorage
+   * @param {Object} newPost New post created when sending a message.
+   * @returns true or false
+   * @memberof Chat
+   */
   isSamePost (post, newPost) {
     return post.username === newPost.username &&
     post.data === newPost.data &&
@@ -206,7 +240,7 @@ class Chat extends window.HTMLElement {
   }
 
   /**
-   *
+   * Checks if there is any saved message in localstorage and prints it to the DOM.
    *
    * @memberof Chat
    */
@@ -221,6 +255,11 @@ class Chat extends window.HTMLElement {
     }
   }
 
+  /**
+   *  Sets the username to localstorage.
+   *
+   * @memberof Chat
+   */
   storageUser () {
     const user = {
       username: this.nickname
@@ -229,6 +268,11 @@ class Chat extends window.HTMLElement {
     window.localStorage.setItem('user', JSON.stringify(user))
   }
 
+  /**
+   *  Clean method to whipe template.
+   *
+   * @memberof Chat
+   */
   clean () {
     const container = this.shadowRoot.querySelector('#chat-container')
     while (container.firstChild) {
@@ -236,4 +280,6 @@ class Chat extends window.HTMLElement {
     }
   }
 }
+
+// creates the costum element.
 window.customElements.define('chat-app', Chat)

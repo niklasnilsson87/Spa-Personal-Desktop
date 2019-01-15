@@ -3,8 +3,8 @@
 * Desktop controller module
 *
 * Contains eventlistener to create eatch apps
-*
-*
+* Eatch eventlistener pushes the app into the array,
+* gets the icon to the app, has an updateZindex function and a close function
 *
 */
 

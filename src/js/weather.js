@@ -34,7 +34,7 @@ class Weather extends window.HTMLElement {
   /**
    *  Method that querys from the shadowRoot.
    *
-   * @param {String} query
+   * @param {String} query string from the query that you use.
    * @returns path to shadowRoot.
    * @memberof Weather
    */
@@ -43,7 +43,7 @@ class Weather extends window.HTMLElement {
   }
 
   /**
-   * Starting point of the application.
+   * Listening when the application is running in DOM.
    *
    * @memberof Weather
    */
@@ -53,7 +53,7 @@ class Weather extends window.HTMLElement {
   }
 
   /**
-   * Method to get weather from openweathermap.com.
+   * Async method to get weather from openweathermap.com.
    *
    * @memberof Weather
    */
@@ -67,7 +67,7 @@ class Weather extends window.HTMLElement {
       this.noExist.textContent = 'Try again'
       setTimeout(() => {
         this.noExist.textContent = ''
-      }, 1000)
+      }, 2000)
     }
   }
 
@@ -77,12 +77,19 @@ class Weather extends window.HTMLElement {
    * @memberof Weather
    */
   getInputValue () {
-    let submit = this.shadowRoot.querySelector('.submit')
+    let submit = this.query('.submit')
 
     submit.addEventListener('click', e => {
       e.preventDefault()
       this.noExist.textContent = ''
       this.getWeather()
+    })
+    this.city.addEventListener('keypress', e => {
+      if (e.keyCode === 13) {
+        e.preventDefault()
+        this.noExist.textContent = ''
+        this.getWeather()
+      }
     })
   }
 
