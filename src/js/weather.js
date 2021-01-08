@@ -14,7 +14,7 @@ class Weather extends window.HTMLElement {
    */
   constructor () {
     super()
-    this.apiKey = '&APPID=ba59d28f9f13f728e9b8884984882a98'
+    this.apiKey = process.env.TOKEN
     this.api = 'http://api.openweathermap.org/data/2.5/weather?q='
     this.units = '&units=metric'
     this.language = '&lang=se'
